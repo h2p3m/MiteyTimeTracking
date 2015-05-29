@@ -1,0 +1,8 @@
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\WindowsFormsApplication1\MiteyTracking_DAL\bin\Debug\MiteyTracking_DAL.dll
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\WindowsFormsApplication1\MiteyTracking_DAL\bin\Debug\MiteyTracking_DAL.pdb
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\WindowsFormsApplication1\MiteyTracking_DAL\bin\Debug\Mite.dll
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\WindowsFormsApplication1\MiteyTracking_DAL\bin\Debug\Mite.pdb
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\WindowsFormsApplication1\MiteyTracking_DAL\bin\Debug\Mite.xml
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\WindowsFormsApplication1\MiteyTracking_DAL\obj\Debug\MiteyTracking_DAL.csprojResolveAssemblyReference.cache
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\WindowsFormsApplication1\MiteyTracking_DAL\obj\Debug\MiteyTracking_DAL.dll
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\WindowsFormsApplication1\MiteyTracking_DAL\obj\Debug\MiteyTracking_DAL.pdb

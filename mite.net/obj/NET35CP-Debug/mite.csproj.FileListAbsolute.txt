@@ -1,0 +1,6 @@
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\WindowsFormsApplication1\mite.net\bin\NET35CP-Debug\Mite.xml
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\WindowsFormsApplication1\mite.net\bin\NET35CP-Debug\Mite.dll
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\WindowsFormsApplication1\mite.net\bin\NET35CP-Debug\Mite.pdb
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\WindowsFormsApplication1\mite.net\obj\NET35CP-Debug\mite.csprojResolveAssemblyReference.cache
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\WindowsFormsApplication1\mite.net\obj\NET35CP-Debug\Mite.dll
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\WindowsFormsApplication1\mite.net\obj\NET35CP-Debug\Mite.pdb

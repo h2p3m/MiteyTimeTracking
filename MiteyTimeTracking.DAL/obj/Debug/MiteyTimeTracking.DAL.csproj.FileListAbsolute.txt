@@ -1,0 +1,8 @@
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DAL\bin\Debug\MiteyTimeTracking.DAL.dll
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DAL\bin\Debug\MiteyTimeTracking.DAL.pdb
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DAL\bin\Debug\Mite.dll
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DAL\bin\Debug\Mite.pdb
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DAL\bin\Debug\Mite.xml
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DAL\obj\Debug\MiteyTimeTracking.DAL.csprojResolveAssemblyReference.cache
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DAL\obj\Debug\MiteyTimeTracking.DAL.dll
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DAL\obj\Debug\MiteyTimeTracking.DAL.pdb
