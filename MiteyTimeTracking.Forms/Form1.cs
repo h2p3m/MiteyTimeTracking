@@ -106,7 +106,7 @@ namespace MiteyTimeTracking.Forms
 				PanelLShowHide();
 				menuLock = true;
 			}
-			if (e.Modifiers == (Keys)Enum.Parse(typeof(Keys), "Alt", true)
+			else if (e.Modifiers == (Keys)Enum.Parse(typeof(Keys), "Alt", true)
 				&& e.KeyCode == (Keys)Enum.Parse(typeof(Keys), "r", true))
 			{
 				PanelRShowHide();
@@ -120,6 +120,8 @@ namespace MiteyTimeTracking.Forms
 			{
 				menuLock = false;
 			}
+
+			splitContainer2.Focus();
 		}
 
 		private void PrintStartingTime(string devider)
@@ -141,41 +143,11 @@ namespace MiteyTimeTracking.Forms
 		private void MenuStripShowHide()
 		{
 			menuStrip1.Visible = !menuStrip1.Visible;
-
-			this.richTextBox1.Focus();
-
-			//SetTextBoxFocus();
-
-			//PrintFocus();
-		}
-
-		private void SetTextBoxFocus()
-		{
-			if (menuStrip1.Visible == false || splitContainer1.Panel1Collapsed)
-			{
-				if (splitContainer2.Panel2Collapsed)
-				{
-					richTextBox1.Focus();
-					this.ActiveControl = richTextBox1;
-				}
-				else if (splitContainer2.Panel2Collapsed == false)
-				{
-					richTextBox2.Focus();
-					this.ActiveControl = richTextBox2;
-				}
-			}
-
 		}
 
 		private void PanelLShowHide()
 		{
 			splitContainer1.Panel1Collapsed = !splitContainer1.Panel1Collapsed;
-
-			this.richTextBox1.Focus();
-
-			//SetTextBoxFocus();
-
-			//PrintFocus();
 		}
 
 		private void PanelRShowHide()
@@ -184,21 +156,12 @@ namespace MiteyTimeTracking.Forms
 
 			if (splitContainer2.Panel2Collapsed)
 			{
-				this.richTextBox1.Focus();
+				richTextBox1.Focus();
 			}
 			else
 			{
-				this.richTextBox2.Select();
+				richTextBox2.Focus();
 			}
-		}
-
-		private void PrintFocus()
-		{
-			Console.WriteLine("\n----------------------");
-			Console.WriteLine("1: " + richTextBox1.Focused);
-			Console.WriteLine("2: " + richTextBox2.Focused);
-			Console.WriteLine(this.ActiveControl.ToString());
-			Console.WriteLine("----------------------\n");
 		}
 
 		private void button1_Click(object sender, EventArgs e)
@@ -220,11 +183,35 @@ namespace MiteyTimeTracking.Forms
 
 		#region EventHandlers
 
+		//protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+		//{
+		//	if (keyData == (Keys.Alt | Keys.L))
+		//	{
+		//		PanelLShowHide();
+		//		return true;
+		//	}
+		//	else if (keyData == (Keys.Alt | Keys.R))
+		//	{
+		//		PanelRShowHide();
+		//		return true;
+		//	}
+		//	else if (keyData == Keys.Alt && menuLock == false)
+		//	{
+		//		MenuStripShowHide();
+		//		return true;
+		//	}
+
+		//	return base.ProcessCmdKey(ref msg, keyData);
+		//}
+
 		private void Form1_KeyUp(object sender, KeyEventArgs e)
 		{
-			HandleAppShortCuts(e);
-			//SetTextBoxFocus();
-			this.richTextBox1.Focus();
+			if (e.KeyCode == Keys.Menu && menuLock == false)
+			{
+				MenuStripShowHide();
+				menuLock = false;
+			}
+			e.Handled = true;
 		}
 
 		private void richTextBox1_KeyPress_1(object sender, KeyPressEventArgs e)
@@ -290,34 +277,25 @@ namespace MiteyTimeTracking.Forms
 			}
 		}
 
-		private void FindTag(string tagName)
+		private List<string> FindTag(string tagName)
 		{
-			//ab hier Mite-API einbinden
-			//Liste aller Tags vom gesuchten Typ geben
-			//Like/Suche über Liste mit tagName
-
-			//Zugriff auf das MiteModel im DAL
+			List<string> result = new List<string>();
 			switch (currentTagType)
 			{
 				case TagType.Customer:
-					var c = mcm.Customers.GetCustomerNames(tagName);
+					result = mcm.Customers.GetCustomerNames(tagName);
 					break;
 				case TagType.Project:
-					var p = mcm.Projects.GetMatchedProjectNames(tagName);
+					result = mcm.Projects.GetMatchedProjectNames(tagName);
 					break;
 				case TagType.Service:
-					var s = mcm.Services.GetMachedServiceNames(tagName);
+					result = mcm.Services.GetMachedServiceNames(tagName);
 					break;
 				case TagType.Task:
 					;
 					break;
 			}
-		}
-
-		private void Form1_Shown(object sender, EventArgs e)
-		{
-			Control c = sender as Control;
-			RichTextBox rtb = c.Controls.Find(richTextBoxName, true).FirstOrDefault() as RichTextBox;
+			return result;
 		}
 
 		private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
@@ -333,6 +311,31 @@ namespace MiteyTimeTracking.Forms
 		private void richTextBox1_Leave(object sender, EventArgs e)
 		{
 			tagDetectionActive = false;
+		}
+
+		private void showOrHideMenuToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			menuLock = true;
+			MenuStripShowHide();
+		}
+
+		private void showOrHideLeftPanelToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			menuLock = true;
+			PanelLShowHide();
+		}
+
+		private void showOrHideRightPanelToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			menuLock = true;
+			PanelRShowHide();
+		}
+
+		private void Form1_KeyDown(object sender, KeyEventArgs e)
+		{
+			//if (e.Modifiers.Equals(Keys.Alt) && menuStrip1.Visible == false)
+			//{
+			//	e.Handled = true;
 		}
 
 		#endregion

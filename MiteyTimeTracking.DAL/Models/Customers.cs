@@ -13,7 +13,12 @@ namespace MiteyTimeTracking.DAL.Models
 
 		public Customers(IList<Customer> customers)
 		{
-			customers = new List<Mite.Customer>(customers);
+			this.customers = new List<Mite.Customer>(customers);
+		}
+
+		public Customers(List<Customer> customers)
+		{
+			this.customers = customers;
 		}
 
 		public List<string> GetCustomerNames(string name)

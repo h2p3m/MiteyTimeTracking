@@ -25,9 +25,13 @@ namespace MiteyTimeTracking.DAL
 
 			using (IDataContext context = new MiteDataContext(miteConfiguration))
 			{
-				customers = new Customers(context.GetAll<Customer>());
-				projects = new Projects(context.GetAll<Project>());
-				services = new Services(context.GetAll<Service>());
+				IList<Customer> miteCustomerList = context.GetAll<Customer>();
+				IList<Project> miteProjectList = context.GetAll<Project>();
+				IList<Service> miteServiceList = context.GetAll<Service>();
+
+				customers = new Customers(miteCustomerList);
+				projects = new Projects(miteProjectList);
+				services = new Services(miteServiceList);
 			}
 		}
 	}

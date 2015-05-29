@@ -53,6 +53,10 @@
 			this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.showOrHideMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.showOrHideLeftPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.showOrHideRightPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.indexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,6 +89,7 @@
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.toolsToolStripMenuItem,
+            this.viewToolStripMenuItem,
             this.helpToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
@@ -280,6 +285,40 @@
 			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(202, 36);
 			this.optionsToolStripMenuItem.Text = "&Options";
 			// 
+			// viewToolStripMenuItem
+			// 
+			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showOrHideMenuToolStripMenuItem,
+            this.showOrHideLeftPanelToolStripMenuItem,
+            this.showOrHideRightPanelToolStripMenuItem});
+			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+			this.viewToolStripMenuItem.Size = new System.Drawing.Size(78, 38);
+			this.viewToolStripMenuItem.Text = "View";
+			// 
+			// showOrHideMenuToolStripMenuItem
+			// 
+			this.showOrHideMenuToolStripMenuItem.Name = "showOrHideMenuToolStripMenuItem";
+			this.showOrHideMenuToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.M)));
+			this.showOrHideMenuToolStripMenuItem.Size = new System.Drawing.Size(428, 36);
+			this.showOrHideMenuToolStripMenuItem.Text = "Show or hide menu";
+			this.showOrHideMenuToolStripMenuItem.Click += new System.EventHandler(this.showOrHideMenuToolStripMenuItem_Click);
+			// 
+			// showOrHideLeftPanelToolStripMenuItem
+			// 
+			this.showOrHideLeftPanelToolStripMenuItem.Name = "showOrHideLeftPanelToolStripMenuItem";
+			this.showOrHideLeftPanelToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.L)));
+			this.showOrHideLeftPanelToolStripMenuItem.Size = new System.Drawing.Size(428, 36);
+			this.showOrHideLeftPanelToolStripMenuItem.Text = "Show or hide left panel";
+			this.showOrHideLeftPanelToolStripMenuItem.Click += new System.EventHandler(this.showOrHideLeftPanelToolStripMenuItem_Click);
+			// 
+			// showOrHideRightPanelToolStripMenuItem
+			// 
+			this.showOrHideRightPanelToolStripMenuItem.Name = "showOrHideRightPanelToolStripMenuItem";
+			this.showOrHideRightPanelToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.R)));
+			this.showOrHideRightPanelToolStripMenuItem.Size = new System.Drawing.Size(428, 36);
+			this.showOrHideRightPanelToolStripMenuItem.Text = "Show or hide right panel";
+			this.showOrHideRightPanelToolStripMenuItem.Click += new System.EventHandler(this.showOrHideRightPanelToolStripMenuItem_Click);
+			// 
 			// helpToolStripMenuItem
 			// 
 			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -431,10 +470,11 @@
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.menuStrip1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+			this.KeyPreview = true;
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "Form1";
 			this.Text = "Form1";
-			this.Shown += new System.EventHandler(this.Form1_Shown);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
 			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
@@ -491,6 +531,10 @@
 		private System.Windows.Forms.SplitContainer splitContainer2;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.RichTextBox richTextBox2;
+		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem showOrHideMenuToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem showOrHideLeftPanelToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem showOrHideRightPanelToolStripMenuItem;
 
 	}
 }
