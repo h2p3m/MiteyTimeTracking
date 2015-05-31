@@ -24,12 +24,13 @@ namespace MiteyTimeTracking.Forms
 	public partial class Form1 : Form
 	{
 		private bool menuLock = false;
-		private string richTextBoxName;
-		private string tagName;
+		private string richTextBoxName = string.Empty;
+		private string tagName = string.Empty;
 		private bool tagDetectionActive;
 		private MiteConnectorModel mcm;
 		private Dictionary<String, TagType> TagIdentifier = new Dictionary<string, TagType>();
 		private TagType currentTagType = TagType.Customer;
+		private ListBox tagBox = new ListBox();
 
 		public Form1()
 		{
@@ -60,6 +61,8 @@ namespace MiteyTimeTracking.Forms
 			richTextBoxName = richTextBox1.Name;
 			richTextBox1.SelectionStart = richTextBox1.Text.Length;
 			richTextBox1.SelectionColor = Color.Black;
+			tagBox.ScrollAlwaysVisible = false;
+			tagBox.IntegralHeight = true;
 		}
 
 		#region TextFunctions
@@ -211,29 +214,51 @@ namespace MiteyTimeTracking.Forms
 				MenuStripShowHide();
 				menuLock = false;
 			}
+			if (e.KeyCode == Keys.Menu && menuLock == true)
+			{
+				menuLock = false;
+			}
 			e.Handled = true;
+		}
+
+		private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
+		{
+			string line;
+			int columnNumber;
+			GetLineAndColumnNumber(out line, out columnNumber);
+
+			string tagPattern = "[$&+#]";
+
+			if (e.KeyCode == Keys.Back && Regex.Match(line[columnNumber - 1].ToString(), tagPattern).Success)
+			{
+				tagDetectionActive = false;
+				tagName = string.Empty;
+				PopulateListBox(columnNumber);
+			}
+			//TODO auch Space und andere nicht-Buchstaben-Tasten einschließen
+			else if (e.KeyCode == Keys.Back
+				&& tagName.Length > 0)
+			{
+				tagName = tagName.Remove(tagName.Length - 1, 1);
+				PopulateListBox(columnNumber);
+			}
 		}
 
 		private void richTextBox1_KeyPress_1(object sender, KeyPressEventArgs e)
 		{
-			int lineNumber = richTextBox1.GetLineFromCharIndex(richTextBox1.SelectionStart);
-			string line = richTextBox1.Lines[lineNumber];
-			int columnNumber = richTextBox1.SelectionStart - richTextBox1.GetFirstCharIndexFromLine(lineNumber);
-			var selStart = richTextBox1.SelectionStart;
+			string line;
+			int columnNumber;
+			GetLineAndColumnNumber(out line, out columnNumber);
 
 			string tagPattern = "[$&+#]";
 
-			if (e.KeyChar == '\b' && Regex.Match(line[columnNumber - 1].ToString(), tagPattern).Success)
-			{
-				tagDetectionActive = false;
-			}
-
-			if (tagDetectionActive)
+			if (tagDetectionActive
+				&& char.IsLetter(e.KeyChar))
 			{
 				tagName += e.KeyChar;
 				if (tagName.Count() >= 1)
 				{
-					FindTag(tagName);
+					PopulateListBox(columnNumber);
 				}
 			}
 
@@ -243,11 +268,11 @@ namespace MiteyTimeTracking.Forms
 				string devider = ":> ";
 				PrintStartingTime(devider);
 			}
-			else if (tagDetectionActive && e.KeyChar.ToString() == Keys.Space.ToString())
-			{
-				tagDetectionActive = false;
-				tagName = string.Empty;
-			}
+			//else if (tagDetectionActive && e.KeyChar.ToString() == Keys.Space.ToString())
+			//{
+			//	tagDetectionActive = false;
+			//	tagName = string.Empty;
+			//}
 			else if (Regex.Match(e.KeyChar.ToString(), tagPattern).Success)
 			{
 				tagDetectionActive = true;
@@ -274,6 +299,38 @@ namespace MiteyTimeTracking.Forms
 				Array.Reverse(charArray);
 				charactersBeforeCursor = new string(charArray);
 				string searchWord = charactersBeforeCursor + charactersAfterCursor;
+			}
+		}
+
+		private void GetLineAndColumnNumber(out string line, out int columnNumber)
+		{
+			int lineNumber = richTextBox1.GetLineFromCharIndex(richTextBox1.SelectionStart);
+			line = richTextBox1.Lines[lineNumber];
+			columnNumber = richTextBox1.SelectionStart - richTextBox1.GetFirstCharIndexFromLine(lineNumber);
+		}
+
+		private void PopulateListBox(int columnNumber)
+		{
+			if (tagName.Length >= 1)
+			{
+				tagBox.Items.Clear();
+				tagBox.Items.AddRange(FindTag(tagName).ToArray());
+				if (tagBox.Items.Count == 0)
+				{
+					richTextBox1.Controls.Clear();
+					return;
+				}
+				int height = richTextBox1.Font.Height * tagBox.Items.Count;
+				int fontWidth = 423;
+				tagBox.Size = new Size(fontWidth, height);
+				richTextBox1.Controls.Add(tagBox);
+				Point p = richTextBox1.GetPositionFromCharIndex(columnNumber);
+				p.Y += richTextBox1.Font.Height;
+				tagBox.Location = p;
+			}
+			else
+			{
+				richTextBox1.Controls.Clear();
 			}
 		}
 
@@ -371,6 +428,7 @@ namespace MiteyTimeTracking.Forms
 		{
 			SelectAll();
 		}
+
 		#endregion
 	}
 }

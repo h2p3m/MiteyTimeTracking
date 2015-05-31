@@ -410,6 +410,7 @@
 			this.richTextBox1.Size = new System.Drawing.Size(491, 723);
 			this.richTextBox1.TabIndex = 2;
 			this.richTextBox1.Text = "";
+			this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
 			this.richTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress_1);
 			this.richTextBox1.Leave += new System.EventHandler(this.richTextBox1_Leave);
 			// 
@@ -473,7 +474,7 @@
 			this.KeyPreview = true;
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "Form1";
-			this.Text = "Form1";
+			this.Text = "MiteyTimeTracking";
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
 			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
 			this.menuStrip1.ResumeLayout(false);

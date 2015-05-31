@@ -13,7 +13,7 @@ namespace MiteyTimeTracking.DAL.Models
 
 		public Services(IList<Service> services)
 		{
-			services = new List<Service>(services);
+			this.services = new List<Service>(services);
 		}
 
 		public List<string> GetMachedServiceNames(string name)

@@ -16,11 +16,6 @@ namespace MiteyTimeTracking.DAL.Models
 			this.customers = new List<Mite.Customer>(customers);
 		}
 
-		public Customers(List<Customer> customers)
-		{
-			this.customers = customers;
-		}
-
 		public List<string> GetCustomerNames(string name)
 		{
 			var foundCustomers = customers.FindAll(

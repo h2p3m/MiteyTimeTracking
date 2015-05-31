@@ -13,7 +13,7 @@ namespace MiteyTimeTracking.DAL.Models
 
 		public Projects(IList<Project> projects)
 		{
-			projects = new List<Project>(projects);
+			this.projects = new List<Project>(projects);
 		}
 
 		public List<string> GetMatchedProjectNames(string name)
