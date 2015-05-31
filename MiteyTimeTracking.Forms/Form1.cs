@@ -63,6 +63,8 @@ namespace MiteyTimeTracking.Forms
 			richTextBox1.SelectionColor = Color.Black;
 			tagBox.ScrollAlwaysVisible = false;
 			tagBox.IntegralHeight = true;
+			tagBox.ItemHeight = richTextBox1.Font.Height;
+			tagBox.Size = new Size(400, richTextBox1.Font.Height);
 		}
 
 		#region TextFunctions
@@ -233,14 +235,14 @@ namespace MiteyTimeTracking.Forms
 			{
 				tagDetectionActive = false;
 				tagName = string.Empty;
-				PopulateListBox(columnNumber);
+				PopulateListBox(columnNumber - 1);
 			}
 			//TODO auch Space und andere nicht-Buchstaben-Tasten einschließen
 			else if (e.KeyCode == Keys.Back
 				&& tagName.Length > 0)
 			{
 				tagName = tagName.Remove(tagName.Length - 1, 1);
-				PopulateListBox(columnNumber);
+				PopulateListBox(columnNumber - 1);
 			}
 		}
 
@@ -320,9 +322,12 @@ namespace MiteyTimeTracking.Forms
 					richTextBox1.Controls.Clear();
 					return;
 				}
-				int height = richTextBox1.Font.Height * tagBox.Items.Count;
-				int fontWidth = 423;
-				tagBox.Size = new Size(fontWidth, height);
+				int height = (richTextBox1.Font.Height + 10) * tagBox.Items.Count;
+				int width = 423;
+				Size s = new Size();
+				s.Height = height;
+				s.Width = width;
+				tagBox.Size = s;
 				richTextBox1.Controls.Add(tagBox);
 				Point p = richTextBox1.GetPositionFromCharIndex(columnNumber);
 				p.Y += richTextBox1.Font.Height;
@@ -386,13 +391,6 @@ namespace MiteyTimeTracking.Forms
 		{
 			menuLock = true;
 			PanelRShowHide();
-		}
-
-		private void Form1_KeyDown(object sender, KeyEventArgs e)
-		{
-			//if (e.Modifiers.Equals(Keys.Alt) && menuStrip1.Visible == false)
-			//{
-			//	e.Handled = true;
 		}
 
 		#endregion

@@ -23,7 +23,7 @@ namespace MiteyTimeTracking.DAL.Models
 					name.ToUpper()));
 
 			List<string> result = new List<string>();
-			foreach (var item in services)
+			foreach (var item in foundServices)
 			{
 				result.Add(item.Name);
 			}

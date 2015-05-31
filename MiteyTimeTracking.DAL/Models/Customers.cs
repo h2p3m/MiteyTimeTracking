@@ -19,8 +19,8 @@ namespace MiteyTimeTracking.DAL.Models
 		public List<string> GetCustomerNames(string name)
 		{
 			var foundCustomers = customers.FindAll(
-				f => f.Name.ToUpper()
-					.Contains(name.ToUpper()));
+				f => f.Name.ToUpper().Contains(
+					name.ToUpper()));
 
 			List<string> result = new List<string>();
 			foreach (var item in foundCustomers)
