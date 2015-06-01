@@ -222,56 +222,13 @@ namespace MiteyTimeTracking.Forms
 				if (IsTagIdentifier(tokenString))
 				{
 					tagDetectionActive = false;
-					tagName = string.Empty;
-					PopulateListBox(tokenPosition);
-				}
-				//else if (char.IsLetter(token))
-				//{
-				//	string test = GetCharsBeforeCursor(line, tokenPosition);
-				//	char testChar = test.ToCharArray()[test.Length - 1];
-				//	if (IsTagIdentifier(testChar.ToString()))
-				//	{
-
-				//	}
-				//}
-				//delete last char from tagName
-				else if (tagName.Length > 0)
-				{
-					tagName = tagName.Remove(tagName.Length - 1, 1);
-					PopulateListBox(tokenPosition);
 				}
 			}
 		}
 
 		private void richTextBox1_KeyPress_1(object sender, KeyPressEventArgs e)
 		{
-			GetLineAndColumnNumber(out line, out columnNumber);
-
-			if (char.IsLetter(e.KeyChar))
-			{
-				if (tagDetectionActive)
-				{
-					tagName += e.KeyChar;
-					tagName = GetWordAtCursor(true);
-					if (tagName.Count() >= 1)
-					{
-						PopulateListBox(columnNumber);
-					}
-				}
-				//activate tag detection
-				else if (IsTagIdentifier(e.KeyChar.ToString()))
-				{
-					tagDetectionActive = true;
-					TagIdentifier.TryGetValue(e.KeyChar.ToString(), out currentTagType);
-				}
-			}
-			else if (e.KeyChar.ToString() == " ")
-			{
-				tagDetectionActive = false;
-				tagName = string.Empty;
-				PopulateListBox(columnNumber);
-			}
-			else if ((Control.ModifierKeys & Keys.Control) == Keys.Control
+			if ((Control.ModifierKeys & Keys.Control) == Keys.Control
 				&& e.KeyChar.ToString() == "\n")
 			{
 				string devider = ":> ";
@@ -287,13 +244,13 @@ namespace MiteyTimeTracking.Forms
 
 		private void richTextBox1_KeyUp(object sender, KeyEventArgs e)
 		{
+			GetLineAndColumnNumber(out line, out columnNumber);
 			string key = e.KeyData.ToString();
 			if (key.Length == 1)
 			{
 				char token = key.ToCharArray()[0];
 				if (char.IsLetter(token))
 				{
-					GetLineAndColumnNumber(out line, out columnNumber);
 					string wordAtCursor = GetWordAtCursor(false);
 					char tagCandidate = wordAtCursor.ToCharArray()[0];
 					if (IsTagIdentifier(tagCandidate.ToString()))
@@ -305,6 +262,16 @@ namespace MiteyTimeTracking.Forms
 					}
 				}
 			}
+			else if (e.KeyData == Keys.Space)
+			{
+				tagDetectionActive = false;
+				tagName = string.Empty;
+				PopulateListBox(columnNumber);
+			}
+			else if (e.KeyData == Keys.Back)
+			{
+				PopulateListBox(columnNumber);
+			}
 		}
 
 		private string GetWordAtCursor(bool cutTagIndicator)
@@ -312,10 +279,13 @@ namespace MiteyTimeTracking.Forms
 			string charsAfterCursor = GetCharsAfterCursor(line, columnNumber);
 			string charsBeforeCursor = GetCharsBeforeCursor(line, columnNumber);
 
-			charsBeforeCursor = ReverseCharsBeforeCursor(charsBeforeCursor);
+			string wordAtCursor = charsBeforeCursor + charsAfterCursor;
+
+			if (string.IsNullOrWhiteSpace(wordAtCursor))
+				return string.Empty;
 			if (cutTagIndicator)
-				return (charsBeforeCursor + charsAfterCursor).Remove(0, 1);
-			return charsBeforeCursor + charsAfterCursor;
+				return (wordAtCursor).Remove(0, 1);
+			return wordAtCursor;
 		}
 
 		private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
@@ -355,7 +325,7 @@ namespace MiteyTimeTracking.Forms
 
 		#region Logic
 
-		private static string GetCharsBeforeCursor(string line, int columnNumber)
+		private string GetCharsBeforeCursor(string line, int columnNumber)
 		{
 			char[] searchLine = line.ToCharArray();
 			int i = columnNumber - 1;
@@ -363,19 +333,21 @@ namespace MiteyTimeTracking.Forms
 			while (i >= 0 && !string.IsNullOrWhiteSpace(searchLine[i].ToString()))
 			{
 				charsBeforeCursor += line[i];
+				if (IsTagIdentifier(charsBeforeCursor))
+				{
+					return ReverseCharsBeforeCursor(charsBeforeCursor);
+				}
 				i--;
 			}
-			return charsBeforeCursor;
+			return ReverseCharsBeforeCursor(charsBeforeCursor);
 		}
 
-		private static string GetCharsAfterCursor(string line, int columnNumber)
+		private string GetCharsAfterCursor(string line, int columnNumber)
 		{
 			char[] searchLine = line.ToCharArray();
 			int i = columnNumber;
 			string charsAfterCursor = string.Empty;
-			while (line.Length > i && (
-				!string.IsNullOrWhiteSpace(searchLine[i].ToString())
-				|| IsTagIdentifier(searchLine, i)))
+			while (line.Length > i && !string.IsNullOrWhiteSpace(searchLine[i].ToString()))
 			{
 				charsAfterCursor += line[i];
 				i++;
