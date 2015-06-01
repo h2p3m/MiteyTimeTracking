@@ -412,6 +412,7 @@
 			this.richTextBox1.Text = "";
 			this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
 			this.richTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress_1);
+			this.richTextBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyUp);
 			this.richTextBox1.Leave += new System.EventHandler(this.richTextBox1_Leave);
 			// 
 			// richTextBox2
