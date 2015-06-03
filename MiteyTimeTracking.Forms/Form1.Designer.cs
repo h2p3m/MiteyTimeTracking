@@ -1,4 +1,4 @@
-﻿namespace MiteyTimeTracking.Forms
+﻿namespace MiteyTimeTracking
 {
 	partial class Form1
 	{
@@ -381,7 +381,8 @@
 			// 
 			this.monthCalendar1.Location = new System.Drawing.Point(18, 18);
 			this.monthCalendar1.Name = "monthCalendar1";
-			this.monthCalendar1.TabIndex = 1;
+			this.monthCalendar1.TabIndex = 2;
+			this.monthCalendar1.TabStop = false;
 			this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
 			// 
 			// splitContainer2
@@ -403,25 +404,28 @@
 			// 
 			// richTextBox1
 			// 
+			this.richTextBox1.AcceptsTab = true;
 			this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.richTextBox1.Font = new System.Drawing.Font("Calibri", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.richTextBox1.Location = new System.Drawing.Point(0, 0);
 			this.richTextBox1.Name = "richTextBox1";
 			this.richTextBox1.Size = new System.Drawing.Size(491, 723);
-			this.richTextBox1.TabIndex = 2;
+			this.richTextBox1.TabIndex = 1;
+			this.richTextBox1.TabStop = false;
 			this.richTextBox1.Text = "";
 			this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
 			this.richTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress_1);
 			this.richTextBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyUp);
-			this.richTextBox1.Leave += new System.EventHandler(this.richTextBox1_Leave);
 			// 
 			// richTextBox2
 			// 
+			this.richTextBox2.AcceptsTab = true;
 			this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.richTextBox2.Location = new System.Drawing.Point(0, 0);
 			this.richTextBox2.Name = "richTextBox2";
 			this.richTextBox2.Size = new System.Drawing.Size(303, 723);
 			this.richTextBox2.TabIndex = 0;
+			this.richTextBox2.TabStop = false;
 			this.richTextBox2.Text = "";
 			// 
 			// button2
@@ -433,6 +437,7 @@
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(83, 37);
 			this.button2.TabIndex = 3;
+			this.button2.TabStop = false;
 			this.button2.Text = "Menu";
 			this.button2.UseVisualStyleBackColor = true;
 			this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -444,6 +449,7 @@
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(104, 36);
 			this.button1.TabIndex = 2;
+			this.button1.TabStop = false;
 			this.button1.Text = "Panel L";
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -457,6 +463,7 @@
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(100, 37);
 			this.button3.TabIndex = 4;
+			this.button3.TabStop = false;
 			this.button3.Text = "Panel R";
 			this.button3.UseVisualStyleBackColor = true;
 			this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -469,8 +476,8 @@
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.button3);
-			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.menuStrip1);
+			this.Controls.Add(this.splitContainer1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
 			this.KeyPreview = true;
 			this.MainMenuStrip = this.menuStrip1;

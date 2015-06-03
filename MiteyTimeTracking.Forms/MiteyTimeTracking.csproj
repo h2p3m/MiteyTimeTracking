@@ -7,8 +7,8 @@
     <ProjectGuid>{53AEB3F0-A794-4351-8269-C2C452E0D5ED}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MiteyTimeTracking.Forms</RootNamespace>
-    <AssemblyName>MiteyTimeTracking.Forms</AssemblyName>
+    <RootNamespace>MiteyTimeTracking</RootNamespace>
+    <AssemblyName>MiteyTimeTracking</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>

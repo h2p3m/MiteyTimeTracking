@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mite", "mite.net\mite.csproj", "{E475C05B-5EF7-494A-ACD4-5353CCA23856}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiteyTimeTracking.Forms", "MiteyTimeTracking.Forms\MiteyTimeTracking.Forms.csproj", "{53AEB3F0-A794-4351-8269-C2C452E0D5ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiteyTimeTracking", "MiteyTimeTracking.Forms\MiteyTimeTracking.csproj", "{53AEB3F0-A794-4351-8269-C2C452E0D5ED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiteyTimeTracking.DAL", "MiteyTimeTracking.DAL\MiteyTimeTracking.DAL.csproj", "{EF223023-6265-4B07-AF1F-D499A9AF75D1}"
 EndProject

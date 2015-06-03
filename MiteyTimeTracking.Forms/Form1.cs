@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using MiteyTimeTracking.DAL;
 
-namespace MiteyTimeTracking.Forms
+namespace MiteyTimeTracking
 {
 	public enum TagType
 	{
@@ -31,9 +31,14 @@ namespace MiteyTimeTracking.Forms
 		private Dictionary<String, TagType> TagIdentifier = new Dictionary<string, TagType>();
 		private TagType currentTagType = TagType.Customer;
 		private ListBox tagBox = new ListBox();
-		private string tagPattern = "[$&+#]";
+		private string customerTagSign = "<";
+		private string projectTagSign = ">";
+		private string serviceTagSign = "'";
+		private string taskTagSign = "#";
+		private string tagPattern = string.Empty;
 		private string line = string.Empty;
 		private int columnNumber = 0;
+		private string activeCustomer = string.Empty;
 
 		public Form1()
 		{
@@ -49,10 +54,16 @@ namespace MiteyTimeTracking.Forms
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 
-			TagIdentifier.Add("$", TagType.Customer);
-			TagIdentifier.Add("&", TagType.Project);
-			TagIdentifier.Add("+", TagType.Service);
-			TagIdentifier.Add("#", TagType.Task);
+			tagPattern = string.Format("[{0}{1}{2}{3}]"
+				, customerTagSign
+				, projectTagSign
+				, serviceTagSign
+				, taskTagSign);
+
+			TagIdentifier.Add(customerTagSign, TagType.Customer);
+			TagIdentifier.Add(projectTagSign, TagType.Project);
+			TagIdentifier.Add(serviceTagSign, TagType.Service);
+			TagIdentifier.Add(taskTagSign, TagType.Task);
 
 			this.KeyPreview = true;
 
@@ -71,6 +82,7 @@ namespace MiteyTimeTracking.Forms
 			tagBox.IntegralHeight = true;
 			tagBox.ItemHeight = richTextBox1.Font.Height;
 			tagBox.Size = new Size(400, richTextBox1.Font.Height);
+			tagBox.KeyDown += new KeyEventHandler(this.Tagbox_KeyDown);
 		}
 
 		#region TextFunctions
@@ -140,11 +152,12 @@ namespace MiteyTimeTracking.Forms
 			string date;
 			date = DateTime.Now.ToShortTimeString();
 			richTextBox1.AppendText(date + devider);
-			richTextBox1.SelectionStart = richTextBox1.Text.Length - (date + devider).Length;
-			richTextBox1.SelectionLength = 8;
-			richTextBox1.SelectionColor = Color.RoyalBlue;
-			richTextBox1.SelectionStart = richTextBox1.Text.Length;
-			richTextBox1.SelectionColor = Color.Black;
+			ParseLine();
+			//richTextBox1.SelectionStart = richTextBox1.Text.Length - (date + devider).Length;
+			//richTextBox1.SelectionLength = 8;
+			//richTextBox1.SelectionColor = Color.RoyalBlue;
+			//richTextBox1.SelectionStart = richTextBox1.Text.Length;
+			//richTextBox1.SelectionColor = Color.Black;
 		}
 
 		#endregion
@@ -211,68 +224,174 @@ namespace MiteyTimeTracking.Forms
 
 		private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode == Keys.Back)
+			//tag indicator deleted
+			if (e.KeyCode == Keys.Back && !string.IsNullOrWhiteSpace(line))
 			{
 				GetLineAndColumnNumber(out line, out columnNumber);
-				int tokenPosition = columnNumber - 1;
+				int tokenPosition = columnNumber > 0 ? columnNumber - 1 : 0;
 				char token = line[tokenPosition];
 				string tokenString = token.ToString();
 
-				//tag indicator deleted
 				if (IsTagIdentifier(tokenString))
 				{
-					tagDetectionActive = false;
+					CancelTagDetection();
 				}
 			}
+			
+			//tag indicator selected
+			else if (tagBox.SelectedItem != null
+				&& tagDetectionActive == true
+				&& (e.KeyData == Keys.Enter
+				|| e.KeyData == Keys.Tab
+				|| e.KeyData == Keys.Space
+				|| e.KeyData == Keys.OemPeriod))
+			{
+				ApplyTagNameToRichTextBox();
+				e.Handled = true;
+			}
+			
+			//navigate through tagBox
+			else if (tagBox.Items.Count > 0
+				&& (e.KeyData == Keys.Up || e.KeyData == Keys.Down))
+			{
+				if (e.KeyData == Keys.Up && tagBox.SelectedIndex > 0)
+				{
+					tagBox.SelectedIndex--;
+				}
+				else if (e.KeyData == Keys.Down && tagBox.SelectedIndex < tagBox.Items.Count - 1)
+				{
+					tagBox.SelectedIndex++;
+				}
+
+				if (e.KeyData == Keys.Up || e.KeyData == Keys.Down)
+				{
+					e.Handled = true;
+				}
+			}
+
+			//cancel tagDetection
+			else if (e.KeyData == Keys.Escape)
+			{
+				CancelTagDetection();
+			}
+		}
+
+		private void CancelTagDetection()
+		{
+			tagDetectionActive = false;
+			activeCustomer = string.Empty;
+			tagBox.Items.Clear();
+			richTextBox1.Controls.Clear();
 		}
 
 		private void richTextBox1_KeyPress_1(object sender, KeyPressEventArgs e)
 		{
 			if ((Control.ModifierKeys & Keys.Control) == Keys.Control
-				&& e.KeyChar.ToString() == "\n")
+				&& e.KeyChar == ' ')
 			{
-				string devider = ":> ";
-				PrintStartingTime(devider);
+				string word = GetWordAtCursor(false);
+				if (!string.IsNullOrWhiteSpace(word)
+					&& IsTagIdentifier(word.Remove(1, word.Length - 1))
+					&& DetectTag())
+				{
+					FillAndPlaceListBox(columnNumber, tagName);
+				}
+				e.Handled = true;
 			}
 			else if (IsTagIdentifier(e.KeyChar.ToString()))
 			{
-				tagDetectionActive = true;
-				TagIdentifier.TryGetValue(e.KeyChar.ToString(), out currentTagType);
-				tagName = string.Empty;
+				ApplyTagNameToRichTextBox();
 			}
+			else if ((Control.ModifierKeys & Keys.Control) == Keys.Control
+				&& e.KeyChar.ToString() == "\n")
+			{
+				PrintStartingTime(":> ");
+			}
+			//else if (IsTagIdentifier(e.KeyChar.ToString()))
+			//{
+			//	tagDetectionActive = true;
+			//	TagIdentifier.TryGetValue(e.KeyChar.ToString(), out currentTagType);
+			//	tagName = string.Empty;
+			//}
 		}
 
 		private void richTextBox1_KeyUp(object sender, KeyEventArgs e)
 		{
+			ParseLine();
+
 			GetLineAndColumnNumber(out line, out columnNumber);
 			string key = e.KeyData.ToString();
 			if (key.Length == 1)
 			{
 				char token = key.ToCharArray()[0];
-				if (char.IsLetter(token))
+				if (char.IsLetter(token) && DetectTag())
 				{
-					string wordAtCursor = GetWordAtCursor(false);
-					char tagCandidate = wordAtCursor.ToCharArray()[0];
-					if (IsTagIdentifier(tagCandidate.ToString()))
-					{
-						tagDetectionActive = true;
-						TagIdentifier.TryGetValue(tagCandidate.ToString(), out currentTagType);
-						tagName = wordAtCursor.Remove(0, 1);
-						PopulateListBox(columnNumber);
-					}
+					FillAndPlaceListBox(columnNumber, tagName);
 				}
 			}
-			else if (e.KeyData == Keys.Space)
+			else if (e.KeyData == Keys.Back 
+				&& tagDetectionActive == true
+				&& DetectTag())
 			{
-				tagDetectionActive = false;
-				tagName = string.Empty;
-				PopulateListBox(columnNumber);
-			}
-			else if (e.KeyData == Keys.Back)
-			{
-				PopulateListBox(columnNumber);
+				FillAndPlaceListBox(columnNumber, tagName);
 			}
 		}
+
+		private void ParseLine()
+		{
+			string datePattern = @"(?<date>[0-9]{2}.[0-9]{2}.[0-9]{4})";
+			string timePattern = @"(?<time>[0-9]{2}:[0-9]{2}:>)";
+			string customerPattern = @"(?<customer><[A-Za-z]\w+)";
+			string projectPattern = @"(?<project>>[A-Za-z]\w+)";
+			string servicePattern = @"(?<service>'[A-Za-z]\w+)";
+			string taskPattern = @"(?<task>#[0-9]{1,})";
+
+			string pattern = string.Format("{0}|{1}|{2}|{3}|{4}|{5}",
+				datePattern,
+				timePattern,
+				customerPattern,
+				projectPattern,
+				servicePattern,
+				taskPattern);
+
+			Regex myRegex = new Regex(pattern, RegexOptions.None);
+
+			int lineNumber = richTextBox1.GetLineFromCharIndex(richTextBox1.SelectionStart);
+
+			foreach (Match myMatch in myRegex.Matches(richTextBox1.Lines[lineNumber]))
+			{
+				if (myMatch.Groups["time"].Success)
+				
+				{
+					int absoluteIndex = richTextBox1.GetFirstCharIndexOfCurrentLine();
+					richTextBox1.SelectionStart = absoluteIndex + myMatch.Index;
+					richTextBox1.SelectionLength = absoluteIndex + myMatch.Length;
+					richTextBox1.SelectionColor = Color.RoyalBlue;
+					richTextBox1.SelectionStart = absoluteIndex + myMatch.Index + myMatch.Length;
+					richTextBox1.SelectionColor = Color.Black;
+				}
+			}
+		}
+
+		private void Tagbox_KeyDown(object sender, KeyEventArgs e)
+		{
+			ApplyTagNameToRichTextBox();
+		}
+
+		private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
+		{
+			Process.Start(e.LinkText);
+		}
+
+		protected override void OnShown(EventArgs e)
+		{
+			richTextBox1.Focus();
+			base.OnShown(e);
+		}
+
+		#endregion
+
+		#region Logic
 
 		private string GetWordAtCursor(bool cutTagIndicator)
 		{
@@ -288,19 +407,72 @@ namespace MiteyTimeTracking.Forms
 			return wordAtCursor;
 		}
 
-		private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
+		private bool DetectTag()
 		{
-			Process.Start(e.LinkText);
+			string wordAtCursor = GetWordAtCursor(false);
+			if (!string.IsNullOrWhiteSpace(wordAtCursor))
+			{
+				char tagCandidate = wordAtCursor.ToCharArray()[0];
+				if (IsTagIdentifier(tagCandidate.ToString()))
+				{
+					tagDetectionActive = true;
+					TagIdentifier.TryGetValue(tagCandidate.ToString(), out currentTagType);
+					tagName = wordAtCursor.Remove(0, 1);
+					return true;
+				}
+				else
+				{
+					tagDetectionActive = false;
+					return false;
+				}
+			}
+			return false;
+		}
+
+		private void ApplyTagNameToRichTextBox()
+		{
+			if (tagBox.SelectedItem != null)
+			{
+				GetLineAndColumnNumber(out line, out columnNumber);
+				int n = columnNumber - 1;
+				char[] charsInLine = line.ToCharArray();
+				string tagSign = string.Empty;
+
+				int selectionStart = richTextBox1.SelectionStart;
+				int selectionLength = 0;
+
+				for (int i = n; i > 0; i--)
+				{
+					if (IsTagIdentifier(charsInLine[i].ToString()))
+					{
+						if (charsInLine[i].ToString() == customerTagSign)
+						{
+							tagSign = charsInLine[i].ToString();
+						}
+						break;
+					}
+					selectionStart--;
+					selectionLength++;
+				}
+
+				richTextBox1.SelectionStart = selectionStart;
+				richTextBox1.SelectionLength = selectionLength;
+				richTextBox1.SelectedText = tagBox.SelectedItem.ToString();
+
+				if (!string.IsNullOrWhiteSpace(tagSign))
+				{
+					activeCustomer = tagBox.SelectedItem.ToString();
+				}
+
+				tagBox.Items.Clear();
+				tagDetectionActive = false;
+				richTextBox1.Controls.Clear();
+			}
 		}
 
 		private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
 		{
 			richTextBox1.Text = monthCalendar1.SelectionEnd.ToShortDateString();
-		}
-
-		private void richTextBox1_Leave(object sender, EventArgs e)
-		{
-			tagDetectionActive = false;
 		}
 
 		private void showOrHideMenuToolStripMenuItem_Click(object sender, EventArgs e)
@@ -320,10 +492,6 @@ namespace MiteyTimeTracking.Forms
 			menuLock = true;
 			PanelRShowHide();
 		}
-
-		#endregion
-
-		#region Logic
 
 		private string GetCharsBeforeCursor(string line, int columnNumber)
 		{
@@ -347,7 +515,8 @@ namespace MiteyTimeTracking.Forms
 			char[] searchLine = line.ToCharArray();
 			int i = columnNumber;
 			string charsAfterCursor = string.Empty;
-			while (line.Length > i && !string.IsNullOrWhiteSpace(searchLine[i].ToString()))
+			while (line.Length > i && !string.IsNullOrWhiteSpace(searchLine[i].ToString())
+				&& !IsTagIdentifier(searchLine[i].ToString()))
 			{
 				charsAfterCursor += line[i];
 				i++;
@@ -355,7 +524,7 @@ namespace MiteyTimeTracking.Forms
 			return charsAfterCursor;
 		}
 
-		private static bool IsTagIdentifier(char[] searchLine, int i)
+		private bool IsTagIdentifier(char[] searchLine, int i)
 		{
 			return Regex.Match(searchLine[i].ToString(), "[$&+#]").Success;
 		}
@@ -365,7 +534,7 @@ namespace MiteyTimeTracking.Forms
 			return Regex.Match(e, tagPattern).Success;
 		}
 
-		private static string ReverseCharsBeforeCursor(string charsBeforeCursor)
+		private string ReverseCharsBeforeCursor(string charsBeforeCursor)
 		{
 			char[] charArray = charsBeforeCursor.ToCharArray();
 			Array.Reverse(charArray);
@@ -380,35 +549,29 @@ namespace MiteyTimeTracking.Forms
 			columnNumber = richTextBox1.SelectionStart - richTextBox1.GetFirstCharIndexFromLine(lineNumber);
 		}
 
-		private void PopulateListBox(int tokenPosition)
+		private void FillAndPlaceListBox(int tokenPosition, string tagName)
 		{
-			GetLineAndColumnNumber(out line, out columnNumber);
-			tagName = GetWordAtCursor(true);
+			int lineNumber = richTextBox1.GetLineFromCharIndex(richTextBox1.SelectionStart);
 
-			if (tagName.Length >= 1)
-			{
-				tagBox.Items.Clear();
-				tagBox.Items.AddRange(GetAllSuitableTags(tagName).ToArray());
-				if (tagBox.Items.Count == 0)
-				{
-					richTextBox1.Controls.Clear();
-					return;
-				}
-				int height = (richTextBox1.Font.Height + 10) * tagBox.Items.Count;
-				int width = 423;
-				Size s = new Size();
-				s.Height = height;
-				s.Width = width;
-				tagBox.Size = s;
-				richTextBox1.Controls.Add(tagBox);
-				Point p = richTextBox1.GetPositionFromCharIndex(tokenPosition);
-				p.Y += richTextBox1.Font.Height;
-				tagBox.Location = p;
-			}
-			else
+			tagBox.Items.Clear();
+			tagBox.Items.AddRange(GetAllSuitableTags(tagName).ToArray());
+			if (tagBox.Items.Count == 0)
 			{
 				richTextBox1.Controls.Clear();
+				tagBox.Items.Clear();
+				return;
 			}
+			int height = (richTextBox1.Font.Height + 10) * tagBox.Items.Count;
+			int width = 423;
+			Size s = new Size();
+			s.Height = height;
+			s.Width = width;
+			tagBox.Size = s;
+			richTextBox1.Controls.Add(tagBox);
+			Point p = richTextBox1.GetPositionFromCharIndex(tokenPosition);
+			p.Y += richTextBox1.Font.Height * (lineNumber + 1);
+			tagBox.Location = p;
+			tagBox.SelectedIndex = 0;
 		}
 
 		private List<string> GetAllSuitableTags(string tagName)
@@ -420,7 +583,7 @@ namespace MiteyTimeTracking.Forms
 					result = mcm.Customers.GetCustomerNames(tagName);
 					break;
 				case TagType.Project:
-					result = mcm.Projects.GetMatchedProjectNames(tagName);
+					result = mcm.Projects.GetMatchedProjectNames(tagName, activeCustomer);
 					break;
 				case TagType.Service:
 					result = mcm.Services.GetMachedServiceNames(tagName);

@@ -25,7 +25,7 @@ namespace MiteyTimeTracking.DAL.Models
 			List<string> result = new List<string>();
 			foreach (var item in foundServices)
 			{
-				result.Add(item.Name);
+				result.Add(item.Name.Replace(" ", string.Empty));
 			}
 
 			return result;

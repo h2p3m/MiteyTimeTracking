@@ -17,19 +17,20 @@ namespace MiteyTimeTracking.DAL.Models
 		}
 
 		//TODO Filter zusätzlich auf Customer
-		public List<string> GetMatchedProjectNames(string name)
+		public List<string> GetMatchedProjectNames(string name, string customerName)
 		{
 			var foundProjects = projects.FindAll(
-				f => f.Name.ToUpper().Contains(
-					name.ToUpper()));
+				f => f.Name.ToUpper().Contains(name.ToUpper()));
+			foundProjects = foundProjects.FindAll(
+				f => f.Customer.Name.ToUpper().Contains(customerName.ToUpper()));
 
 			List<string> result = new List<string>();
 			foreach (var item in foundProjects)
 			{
-				result.Add(item.Name);
+				result.Add(item.Name.Replace(" ", string.Empty));
 			}
 
-			return result;
+			return result.Distinct().ToList();
 		}
 	}
 }
