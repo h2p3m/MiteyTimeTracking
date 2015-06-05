@@ -4,12 +4,12 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+
 namespace Mite
 {
-    using System;
-    using System.Collections.Generic;
-
-    internal class QueryTranslator
+	internal class QueryTranslator
     {
         private readonly QueryExpression _expression;
 

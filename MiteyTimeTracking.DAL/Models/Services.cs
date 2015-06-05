@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Mite;
 
 namespace MiteyTimeTracking.DAL.Models
 {
 	public class Services
 	{
-		private List<Service> services;
+		private List<Service> _services;
 
 		public Services(IList<Service> services)
 		{
-			this.services = new List<Service>(services);
+			this._services = new List<Service>(services);
 		}
 
 		public List<string> GetMachedServiceNames(string name)
 		{
-			var foundServices = services.FindAll(
+			var foundServices = _services.FindAll(
 				f => f.Name.ToUpper().Contains(
 					name.ToUpper()));
 

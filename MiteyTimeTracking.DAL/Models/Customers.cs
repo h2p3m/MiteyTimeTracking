@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Mite;
 
 namespace MiteyTimeTracking.DAL.Models
 {
 	public class Customers
 	{
-		private List<Customer> customers;
+		private List<Customer> _customers;
 
 		public Customers(IList<Customer> customers)
 		{
-			this.customers = new List<Mite.Customer>(customers);
+			this._customers = new List<Customer>(customers);
 		}
 
 		public List<string> GetCustomerNames(string name)
 		{
-			var foundCustomers = customers.FindAll(
+			var foundCustomers = _customers.FindAll(
 				f => f.Name.ToUpper().Contains(
 					name.ToUpper()));
 

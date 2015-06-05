@@ -3,6 +3,7 @@
 // This software is licensed as Microsoft Public License (Ms-PL).
 // </copyright>
 //-----------------------------------------------------------------------
+
 using System.Diagnostics;
 
 namespace Mite

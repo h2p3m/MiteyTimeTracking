@@ -3,10 +3,11 @@
 // This software is licensed as Microsoft Public License (Ms-PL).
 // </copyright>
 //-----------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
-using System.Xml;
 using System.Globalization;
+using System.Xml;
 
 namespace Mite
 {

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Mite;
 using MiteyTimeTracking.DAL.Models;
 
@@ -10,13 +7,13 @@ namespace MiteyTimeTracking.DAL
 {
 	public class MiteConnectorModel
 	{
-		public Customers Customers { get { return customers; } }
-		public Projects Projects { get { return projects; } }
-		public Services Services { get { return services; } }
+		public Customers Customers { get { return _customers; } }
+		public Projects Projects { get { return _projects; } }
+		public Services Services { get { return _services; } }
 
-		private Customers customers;
-		private Projects projects;
-		private Services services;
+		private Customers _customers;
+		private Projects _projects;
+		private Services _services;
 
 		public MiteConnectorModel()
 		{
@@ -29,9 +26,9 @@ namespace MiteyTimeTracking.DAL
 				IList<Project> miteProjectList = context.GetAll<Project>();
 				IList<Service> miteServiceList = context.GetAll<Service>();
 
-				customers = new Customers(miteCustomerList);
-				projects = new Projects(miteProjectList);
-				services = new Services(miteServiceList);
+				_customers = new Customers(miteCustomerList);
+				_projects = new Projects(miteProjectList);
+				_services = new Services(miteServiceList);
 			}
 		}
 	}

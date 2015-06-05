@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Mite;
 
 namespace MiteyTimeTracking.DAL.Models
 {
 	public class Projects
 	{
-		private List<Project> projects;
+		private List<Project> _projects;
 
 		public Projects(IList<Project> projects)
 		{
-			this.projects = new List<Project>(projects);
+			this._projects = new List<Project>(projects);
 		}
 
 		//TODO Filter zusätzlich auf Customer
 		public List<string> GetMatchedProjectNames(string name, string customerName)
 		{
-			var foundProjects = projects.FindAll(
+			var foundProjects = _projects.FindAll(
 				f => f.Name.ToUpper().Contains(name.ToUpper()));
 			foundProjects = foundProjects.FindAll(
 				f => f.Customer.Name.ToUpper().Contains(customerName.ToUpper()));

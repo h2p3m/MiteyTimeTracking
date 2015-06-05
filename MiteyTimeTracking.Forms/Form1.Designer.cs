@@ -1,11 +1,14 @@
-﻿namespace MiteyTimeTracking
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace MiteyTimeTracking
 {
 	partial class Form1
 	{
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		private System.ComponentModel.IContainer components = null;
+		private IContainer components = null;
 
 		/// <summary>
 		/// Clean up any resources being used.
@@ -374,7 +377,7 @@
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
 			this.splitContainer1.Size = new System.Drawing.Size(1142, 723);
-			this.splitContainer1.SplitterDistance = 340;
+			this.splitContainer1.SplitterDistance = 272;
 			this.splitContainer1.TabIndex = 1;
 			// 
 			// monthCalendar1
@@ -398,8 +401,8 @@
 			// splitContainer2.Panel2
 			// 
 			this.splitContainer2.Panel2.Controls.Add(this.richTextBox2);
-			this.splitContainer2.Size = new System.Drawing.Size(798, 723);
-			this.splitContainer2.SplitterDistance = 491;
+			this.splitContainer2.Size = new System.Drawing.Size(866, 723);
+			this.splitContainer2.SplitterDistance = 427;
 			this.splitContainer2.TabIndex = 3;
 			// 
 			// richTextBox1
@@ -409,10 +412,12 @@
 			this.richTextBox1.Font = new System.Drawing.Font("Calibri", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.richTextBox1.Location = new System.Drawing.Point(0, 0);
 			this.richTextBox1.Name = "richTextBox1";
-			this.richTextBox1.Size = new System.Drawing.Size(491, 723);
+			this.richTextBox1.Size = new System.Drawing.Size(427, 723);
 			this.richTextBox1.TabIndex = 1;
 			this.richTextBox1.TabStop = false;
 			this.richTextBox1.Text = "";
+			this.richTextBox1.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
+			this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
 			this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
 			this.richTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress_1);
 			this.richTextBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyUp);
@@ -423,10 +428,11 @@
 			this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.richTextBox2.Location = new System.Drawing.Point(0, 0);
 			this.richTextBox2.Name = "richTextBox2";
-			this.richTextBox2.Size = new System.Drawing.Size(303, 723);
+			this.richTextBox2.Size = new System.Drawing.Size(435, 723);
 			this.richTextBox2.TabIndex = 0;
 			this.richTextBox2.TabStop = false;
 			this.richTextBox2.Text = "";
+			this.richTextBox2.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
 			// 
 			// button2
 			// 
@@ -501,48 +507,48 @@
 
 		#endregion
 
-		private System.Windows.Forms.MenuStrip menuStrip1;
-		private System.Windows.Forms.SplitContainer splitContainer1;
-		private System.Windows.Forms.RichTextBox richTextBox1;
-		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-		private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem printPreviewToolStripMenuItem;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-		private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-		private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem contentsToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem indexToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-		private System.Windows.Forms.MonthCalendar monthCalendar1;
-		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.Button button2;
-		private System.Windows.Forms.SplitContainer splitContainer2;
-		private System.Windows.Forms.Button button3;
-		private System.Windows.Forms.RichTextBox richTextBox2;
-		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem showOrHideMenuToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem showOrHideLeftPanelToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem showOrHideRightPanelToolStripMenuItem;
+		private MenuStrip menuStrip1;
+		private SplitContainer splitContainer1;
+		private RichTextBox richTextBox1;
+		private ToolStripMenuItem fileToolStripMenuItem;
+		private ToolStripMenuItem newToolStripMenuItem;
+		private ToolStripMenuItem openToolStripMenuItem;
+		private ToolStripSeparator toolStripSeparator;
+		private ToolStripMenuItem saveToolStripMenuItem;
+		private ToolStripMenuItem saveAsToolStripMenuItem;
+		private ToolStripSeparator toolStripSeparator1;
+		private ToolStripMenuItem printToolStripMenuItem;
+		private ToolStripMenuItem printPreviewToolStripMenuItem;
+		private ToolStripSeparator toolStripSeparator2;
+		private ToolStripMenuItem exitToolStripMenuItem;
+		private ToolStripMenuItem editToolStripMenuItem;
+		private ToolStripMenuItem undoToolStripMenuItem;
+		private ToolStripMenuItem redoToolStripMenuItem;
+		private ToolStripSeparator toolStripSeparator3;
+		private ToolStripMenuItem cutToolStripMenuItem;
+		private ToolStripMenuItem copyToolStripMenuItem;
+		private ToolStripMenuItem pasteToolStripMenuItem;
+		private ToolStripSeparator toolStripSeparator4;
+		private ToolStripMenuItem selectAllToolStripMenuItem;
+		private ToolStripMenuItem toolsToolStripMenuItem;
+		private ToolStripMenuItem customizeToolStripMenuItem;
+		private ToolStripMenuItem optionsToolStripMenuItem;
+		private ToolStripMenuItem helpToolStripMenuItem;
+		private ToolStripMenuItem contentsToolStripMenuItem;
+		private ToolStripMenuItem indexToolStripMenuItem;
+		private ToolStripMenuItem searchToolStripMenuItem;
+		private ToolStripSeparator toolStripSeparator5;
+		private ToolStripMenuItem aboutToolStripMenuItem;
+		private MonthCalendar monthCalendar1;
+		private Button button1;
+		private Button button2;
+		private SplitContainer splitContainer2;
+		private Button button3;
+		private RichTextBox richTextBox2;
+		private ToolStripMenuItem viewToolStripMenuItem;
+		private ToolStripMenuItem showOrHideMenuToolStripMenuItem;
+		private ToolStripMenuItem showOrHideLeftPanelToolStripMenuItem;
+		private ToolStripMenuItem showOrHideRightPanelToolStripMenuItem;
 
 	}
 }
