@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using MiteyTimeTracking.DAL;
@@ -33,6 +35,7 @@ namespace MiteyTimeTracking
 		private string _tagName;
 		private bool _tagDetectionActive;
 		private readonly MiteConnectorModel _mcm;
+		private readonly TrelloConnectorModel _tcm;
 		private readonly Dictionary<String, TagType> _tagIdentifier;
 		private TagType _currentTagType;
 		private readonly ListBox _tagBox;
@@ -68,7 +71,20 @@ namespace MiteyTimeTracking
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(@"Es gab ein Problem mit der Mite-API:\n\n" + ex.Message, @"Fehler",
+				MessageBox.Show(@"Es gab ein Problem mit der Mite-API:\n\n" + ex.Message + ex.InnerException, @"Fehler",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+
+			string trelloApiKey = Properties.Settings.Default.trelloAPIKey;
+			string trelloToken = Properties.Settings.Default.trelloToken;
+
+			try
+			{
+				_tcm = new TrelloConnectorModel(trelloApiKey, trelloToken);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(@"Es gab ein Problem mit der Trello-API:\n\n" + ex.Message + ex.InnerException, @"Fehler",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 
@@ -91,7 +107,7 @@ namespace MiteyTimeTracking
 
 			richTextBox1.Text = DateTime.Now.ToShortDateString() + @" ";
 			richTextBox1.Find(DateTime.Now.ToShortDateString());
-			richTextBox1.SelectionColor = Color.Sienna;
+			richTextBox1.SelectionColor = Color.RoyalBlue;
 			richTextBox1.SelectionStart = richTextBox1.Text.Length;
 			richTextBox1.SelectionColor = Color.Black;
 
@@ -173,15 +189,18 @@ namespace MiteyTimeTracking
 
 		private void PrintStartingTime(string devider)
 		{
-			string date;
-			date = DateTime.Now.ToShortTimeString();
-			richTextBox1.AppendText(date + devider);
-			//ParseWord();
-			//richTextBox1.SelectionStart = richTextBox1.Text.Length - (date + devider).Length;
-			//richTextBox1.SelectionLength = 8;
-			//richTextBox1.SelectionColor = Color.RoyalBlue;
-			//richTextBox1.SelectionStart = richTextBox1.Text.Length;
-			//richTextBox1.SelectionColor = Color.Black;
+			var date = DateTime.Now.ToShortTimeString();
+			int selectionStart = richTextBox1.SelectionStart - 1;
+
+			richTextBox1.Select(selectionStart, 1);
+			richTextBox1.SelectedText = ("\n" + date + devider);
+
+			richTextBox1.SelectionStart = selectionStart;
+			richTextBox1.SelectionLength = date.Length + 1;
+
+			richTextBox1.SelectionColor = Color.RoyalBlue;
+			richTextBox1.SelectionStart += date.Length + 2;
+			richTextBox1.SelectionColor = Color.Black;
 		}
 
 		#endregion
@@ -257,8 +276,8 @@ namespace MiteyTimeTracking
 			}
 
 			//navigate through tagBox
-			if (_tagBox.Items.Count > 0
-				&& (e.KeyData == Keys.Up || e.KeyData == Keys.Down))
+			else if (_tagBox.Items.Count > 0
+					 && (e.KeyData == Keys.Up || e.KeyData == Keys.Down))
 			{
 				if (e.KeyData == Keys.Up && _tagBox.SelectedIndex > 0)
 				{
@@ -286,6 +305,21 @@ namespace MiteyTimeTracking
 			}
 		}
 
+		private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if ((Control.ModifierKeys & Keys.Control) == Keys.Control
+				&& e.KeyChar.ToString() == "\n")
+			{
+				PrintStartingTime("\t");
+			}
+			else if ((Control.ModifierKeys & Keys.Control) == Keys.Control
+					 && e.KeyChar.ToString() == " ")
+			{
+				_tagDetectionActive = true;
+				e.Handled = true;
+			}
+		}
+
 		private void TryApplyTagBoxSelection(KeyEventArgs e)
 		{
 			if (_tagBox.SelectedItem != null
@@ -304,6 +338,7 @@ namespace MiteyTimeTracking
 		{
 			_tagBox.Items.Clear();
 			richTextBox1.Controls.Clear();
+			_tagDetectionActive = false;
 		}
 
 		private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -314,57 +349,6 @@ namespace MiteyTimeTracking
 			richTextBox1.SelectionColor = Color.Black;
 		}
 
-		private void richTextBox1_KeyPress_1(object sender, KeyPressEventArgs e)
-		{
-			//if ((ModifierKeys & Keys.Control) == Keys.Control
-			//	&& e.KeyChar == ' ')
-			//{
-			//	string word = GetWordAtTextCursor(false);
-			//	if (!string.IsNullOrWhiteSpace(word)
-			//		&& IsTagIdentifier(word.Remove(1, word.Length - 1))
-			//		&& DetectTag())
-			//	{
-			//		FillAndPlaceListBox(_columnNumber, _tagName);
-			//	}
-			//	e.Handled = true;
-			//}
-			////else if (IsTagIdentifier(e.KeyChar.ToString()))
-			////{
-			////	ApplyTagNameToRichTextBox();
-			////}
-			//else if ((ModifierKeys & Keys.Control) == Keys.Control
-			//	&& e.KeyChar.ToString() == "\n")
-			//{
-			//	PrintStartingTime("\t");
-			//}
-			////else if (IsTagIdentifier(e.KeyChar.ToString()))
-			////{
-			////	tagDetectionActive = true;
-			////	TagIdentifier.TryGetValue(e.KeyChar.ToString(), out currentTagType);
-			////	tagName = string.Empty;
-			////}
-		}
-
-		private void richTextBox1_KeyUp(object sender, KeyEventArgs e)
-		{
-			//GetLineAndColumnNumber(out _line, out _columnNumber);
-			//string key = e.KeyData.ToString();
-			//if (key.Length == 1)
-			//{
-			//	char token = key.ToCharArray()[0];
-			//	if (char.IsLetter(token) && DetectTag())
-			//	{
-			//		FillAndPlaceListBox(_columnNumber, _tagName);
-			//	}
-			//}
-			//else if (e.KeyData == Keys.Back
-			//	&& _tagDetectionActive
-			//	&& DetectTag())
-			//{
-			//	FillAndPlaceListBox(_columnNumber, _tagName);
-			//}
-		}
-
 		private void ParseWord(string word = "")
 		{
 			string datePattern = @"(?<" + PatternGroups.date.ToString() + @">[0-9]{2}.[0-9]{2}.[0-9]{4})";
@@ -372,17 +356,16 @@ namespace MiteyTimeTracking
 			string customerPattern = @"(?<" + PatternGroups.customer.ToString() + @"><[A-Za-z]{1,})";
 			string projectPattern = @"(?<" + PatternGroups.project.ToString() + @">>[A-Za-z]{1,})";
 			string servicePattern = @"(?<" + PatternGroups.service.ToString() + @">'[A-Za-z]{1,})";
-			string taskPattern = @"(?<" + PatternGroups.task.ToString() + @">#[0-9]{1,})";
-			string wordPattern = @"(?<" + PatternGroups.text.ToString() + @">\w+)";
+			string taskPattern = @"(?<" + PatternGroups.task.ToString() + @">#[0-9]{3,})";
+			//string wordPattern = @"(?<" + PatternGroups.text.ToString() + @">\w+)";
 
-			string pattern = string.Format("{0}|{1}|{2}|{3}|{4}|{5}|{6}",
-				datePattern,
-				timePattern,
+			string pattern = string.Format("{0}|{1}|{2}|{3}|{4}|{5}",
 				customerPattern,
 				projectPattern,
 				servicePattern,
 				taskPattern,
-				wordPattern);
+				timePattern,
+				datePattern);
 
 			Regex myRegex = new Regex(pattern, RegexOptions.None);
 
@@ -423,17 +406,18 @@ namespace MiteyTimeTracking
 				}
 				else if (myMatch.Groups[PatternGroups.time.ToString()].Success)
 				{
-					SetColor(absoluteIndex, myMatch, Color.RoyalBlue, word, startPosition, startPosition);
+					SetColor(absoluteIndex, myMatch, Color.RoyalBlue, word, startPosition - myMatch.Length, startPosition);
 				}
 				else if (myMatch.Groups[PatternGroups.date.ToString()].Success)
 				{
-					SetColor(absoluteIndex, myMatch, Color.Crimson, word, startPosition, startPosition);
+					SetColor(absoluteIndex, myMatch, Color.Crimson, word, startPosition - myMatch.Length, startPosition);
 				}
 				else
 				{
 					CancelTagDetection();
 				}
 			}
+
 			richTextBox1.SelectionStart = startPosition;
 			richTextBox1.SelectionLength = 0;
 		}
@@ -448,7 +432,7 @@ namespace MiteyTimeTracking
 		}
 
 		private void SetColor(int absoluteIndex, Match myMatch, Color color,
-			string word = "", int from = 0, int to = 0)
+				string word = "", int from = 0, int to = 0)
 		{
 			if (word != "")
 			{
@@ -460,7 +444,8 @@ namespace MiteyTimeTracking
 					searchWord = word.Remove(0, 1);
 					substract = 1;
 				}
-				found = richTextBox1.Find(searchWord, from, RichTextBoxFinds.WholeWord) - substract;
+				found = richTextBox1.Find(searchWord, from >= 0 ? from : 0,
+					RichTextBoxFinds.WholeWord) - substract;
 				richTextBox1.SelectionStart = found >= 0 ? found : 0;
 				richTextBox1.SelectionLength = myMatch.Length;
 				richTextBox1.SelectionColor = color;
@@ -557,11 +542,6 @@ namespace MiteyTimeTracking
 				richTextBox1.SelectionLength = selectionLength;
 				richTextBox1.SelectedText = _tagBox.SelectedItem.ToString();
 
-				//if (!string.IsNullOrWhiteSpace(tagSign))
-				//{
-				//	_activeCustomer = _tagBox.SelectedItem.ToString();
-				//}
-
 				_tagBox.Items.Clear();
 				_tagDetectionActive = false;
 				richTextBox1.Controls.Clear();
@@ -628,11 +608,6 @@ namespace MiteyTimeTracking
 			return charsAfterCursor;
 		}
 
-		private bool IsTagIdentifier(char[] searchLine, int i)
-		{
-			return Regex.Match(searchLine[i].ToString(), "[$&+#]").Success;
-		}
-
 		private bool IsTagIdentifier(string e)
 		{
 			return Regex.Match(e, _tagPattern).Success;
@@ -651,7 +626,8 @@ namespace MiteyTimeTracking
 			//int lineNumber = richTextBox1.GetLineFromCharIndex(richTextBox1.SelectionStart);
 
 			_tagBox.Items.Clear();
-			_tagBox.Items.AddRange(items: GetAllSuitableTags(tagName, CurrentTagType).ToArray());
+			_tagBox.Items.AddRange(GetAllSuitableTags(tagName, CurrentTagType)
+				.Select(k => k.Key != null ? k.Key : null).ToArray());
 			if (_tagBox.Items.Count == 0)
 			{
 				richTextBox1.Controls.Clear();
@@ -673,9 +649,10 @@ namespace MiteyTimeTracking
 			_tagBox.SelectedIndex = 0;
 		}
 
-		private List<string> GetAllSuitableTags(string tagName, TagType currenTagType)
+		//TODO refactor to dictionary
+		private Dictionary<string, string> GetAllSuitableTags(string tagName, TagType currenTagType)
 		{
-			List<string> result = new List<string>();
+			Dictionary<string, string> result = new Dictionary<string, string>();
 			switch (currenTagType)
 			{
 				case TagType.Customer:
@@ -688,8 +665,7 @@ namespace MiteyTimeTracking
 					result = _mcm.Services.GetMachedServiceNames(tagName);
 					break;
 				case TagType.Task:
-					//TODO trello-API implementieren
-					;
+					result = _tcm.Cards.GetCardsByNumber(tagName);
 					break;
 			}
 			return result;
@@ -730,5 +706,10 @@ namespace MiteyTimeTracking
 		}
 
 		#endregion
+
+		private void Form1_Load(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

@@ -6,3 +6,10 @@ C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyT
 C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DAL\obj\Debug\MiteyTimeTracking.DAL.csprojResolveAssemblyReference.cache
 C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DAL\obj\Debug\MiteyTimeTracking.DAL.dll
 C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DAL\obj\Debug\MiteyTimeTracking.DAL.pdb
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DAL\bin\Debug\TrelloNet.dll
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DAL\bin\Debug\RestSharp.dll
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DAL\bin\Debug\RestSharp.xml
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DAL\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DAL\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DAL\bin\Debug\TrelloNet.xml
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DAL\bin\Debug\MiteyTimeTracking.DAL.dll.config

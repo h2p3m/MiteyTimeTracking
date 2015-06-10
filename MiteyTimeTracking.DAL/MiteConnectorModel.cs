@@ -26,9 +26,16 @@ namespace MiteyTimeTracking.DAL
 				IList<Project> miteProjectList = context.GetAll<Project>();
 				IList<Service> miteServiceList = context.GetAll<Service>();
 
-				_customers = new Customers(miteCustomerList);
-				_projects = new Projects(miteProjectList);
-				_services = new Services(miteServiceList);
+				try
+				{
+					_customers = new Customers(miteCustomerList);
+					_projects = new Projects(miteProjectList);
+					_services = new Services(miteServiceList);
+				}
+				catch (Exception ex)
+				{
+					throw ex;
+				}
 			}
 		}
 	}

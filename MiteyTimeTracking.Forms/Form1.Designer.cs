@@ -371,6 +371,7 @@ namespace MiteyTimeTracking
 			// 
 			// splitContainer1.Panel1
 			// 
+			this.splitContainer1.Panel1.BackColor = System.Drawing.Color.Gainsboro;
 			this.splitContainer1.Panel1.Controls.Add(this.monthCalendar1);
 			// 
 			// splitContainer1.Panel2
@@ -408,6 +409,7 @@ namespace MiteyTimeTracking
 			// richTextBox1
 			// 
 			this.richTextBox1.AcceptsTab = true;
+			this.richTextBox1.BackColor = System.Drawing.Color.FloralWhite;
 			this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.richTextBox1.Font = new System.Drawing.Font("Calibri", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.richTextBox1.Location = new System.Drawing.Point(0, 0);
@@ -419,12 +421,12 @@ namespace MiteyTimeTracking
 			this.richTextBox1.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
 			this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
 			this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
-			this.richTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress_1);
-			this.richTextBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyUp);
+			this.richTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress);
 			// 
 			// richTextBox2
 			// 
 			this.richTextBox2.AcceptsTab = true;
+			this.richTextBox2.BackColor = System.Drawing.Color.FloralWhite;
 			this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.richTextBox2.Location = new System.Drawing.Point(0, 0);
 			this.richTextBox2.Name = "richTextBox2";
@@ -489,6 +491,7 @@ namespace MiteyTimeTracking
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "Form1";
 			this.Text = "MiteyTimeTracking";
+			this.Load += new System.EventHandler(this.Form1_Load);
 			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();

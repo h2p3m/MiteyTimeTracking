@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Mite;
 
 namespace MiteyTimeTracking.DAL.Models
@@ -12,19 +14,11 @@ namespace MiteyTimeTracking.DAL.Models
 			this._services = new List<Service>(services);
 		}
 
-		public List<string> GetMachedServiceNames(string name)
+		public Dictionary<string, string> GetMachedServiceNames(string name)
 		{
-			var foundServices = _services.FindAll(
-				f => f.Name.ToUpper().Contains(
-					name.ToUpper()));
-
-			List<string> result = new List<string>();
-			foreach (var item in foundServices)
-			{
-				result.Add(item.Name.Replace(" ", string.Empty));
-			}
-
-			return result;
+			return _services.Where(w => w.Name.ToUpper().Contains(name.ToUpper()))
+				.Select(s => new {key = s.Name.Replace(" ", String.Empty), name = s.Name})
+				.ToDictionary(d => d.key, d => d.name);
 		}
 	}
 }
