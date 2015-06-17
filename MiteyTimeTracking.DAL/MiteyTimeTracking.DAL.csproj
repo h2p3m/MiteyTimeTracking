@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Mite, Version=1.4.0.0, Culture=neutral, PublicKeyToken=2c526ae7b3e40489, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\mite.net.1.4.0\lib\net40-client\Mite.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -55,19 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MiteConnectorModel.cs" />
-    <Compile Include="Models\Cards.cs" />
-    <Compile Include="Models\Customers.cs" />
-    <Compile Include="Models\Projects.cs" />
-    <Compile Include="Models\Services.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TrelloConnectorModel.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\mite.net\mite.csproj">
-      <Project>{e475c05b-5ef7-494a-acd4-5353cca23856}</Project>
-      <Name>mite</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

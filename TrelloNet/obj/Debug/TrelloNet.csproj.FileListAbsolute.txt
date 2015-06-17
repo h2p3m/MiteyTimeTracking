@@ -1,7 +1,0 @@
-C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\TrelloNet\bin\Debug\TrelloNet.dll
-C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\TrelloNet\bin\Debug\TrelloNet.pdb
-C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\TrelloNet\bin\Debug\RestSharp.dll
-C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\TrelloNet\bin\Debug\RestSharp.xml
-C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\TrelloNet\obj\Debug\TrelloNet.csprojResolveAssemblyReference.cache
-C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\TrelloNet\obj\Debug\TrelloNet.dll
-C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\TrelloNet\obj\Debug\TrelloNet.pdb
