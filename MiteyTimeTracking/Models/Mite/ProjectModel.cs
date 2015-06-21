@@ -4,11 +4,11 @@ using Mite;
 
 namespace MiteyTimeTracking.Models.Mite
 {
-	public class Projects
+	public class ProjectModel
 	{
 		private readonly Dictionary<Project, string> _projectMap = new Dictionary<Project, string>();
 
-		public Projects(IList<Project> projects)
+		public ProjectModel(IList<Project> projects)
 		{
 			var projects1 = new List<Project>(projects);
 			foreach (Project project in projects1)

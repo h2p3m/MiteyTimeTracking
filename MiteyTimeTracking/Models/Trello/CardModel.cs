@@ -5,13 +5,13 @@ using TrelloNet;
 
 namespace MiteyTimeTracking.Models.Trello
 {
-	public class Cards
+	public class CardModel
 	{
 		private readonly ITrello _trello;
 		private readonly Board _devBoardId;
 		private readonly Board _issueBoardId;
 
-		public Cards(ITrello trello)
+		public CardModel(ITrello trello)
 		{
 			_trello = trello;
 			_devBoardId = _trello.Boards.WithId("MpGmUVoZ");

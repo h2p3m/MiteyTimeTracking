@@ -7,9 +7,9 @@ namespace MiteyTimeTracking.DAL
 {
 	public class MiteModel
 	{
-		public Customers Customers { get; private set; }
-		public Projects Projects { get; private set; }
-		public MiteServices Services { get; private set; }
+		public CustomerModel Customers { get; private set; }
+		public ProjectModel Projects { get; private set; }
+		public MiteServiceModel Services { get; private set; }
 
 		public MiteModel()
 		{
@@ -24,9 +24,9 @@ namespace MiteyTimeTracking.DAL
 
 				try
 				{
-					Customers = new Customers(miteCustomerList);
-					Projects = new Projects(miteProjectList);
-					Services = new MiteServices(miteServiceList);
+					Customers = new CustomerModel(miteCustomerList);
+					Projects = new ProjectModel(miteProjectList);
+					Services = new MiteServiceModel(miteServiceList);
 				}
 				catch (Exception ex)
 				{

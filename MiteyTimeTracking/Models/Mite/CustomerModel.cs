@@ -4,11 +4,11 @@ using Mite;
 
 namespace MiteyTimeTracking.Models.Mite
 {
-	public class Customers
+	public class CustomerModel
 	{
 		private readonly Dictionary<string, Customer> _customerMap = new Dictionary<string, Customer>();
 
-		public Customers(IList<Customer> customers)
+		public CustomerModel(IList<Customer> customers)
 		{
 			var customers1 = new List<Customer>(customers);
 			foreach (Customer customer in customers1)

@@ -10,14 +10,14 @@ namespace MiteyTimeTracking.DAL
 		//public Uri AuthorisationUrl { get { return _trello.GetAuthorizationUrl("MiteyTimeTracking", Scope.ReadWrite); } }
 		//public string Authorize { set { _trello.Authorize(value); } }
 
-		public Cards Cards { get; private set; }
+		public CardModel Cards { get; private set; }
 
 		public TrelloModel(string apiKey, string token)
 		{
 			ITrello trello = new Trello(apiKey);
 			trello.Authorize(token);
 
-			Cards = new Cards(trello);
+			Cards = new CardModel(trello);
 		}
 
 	}

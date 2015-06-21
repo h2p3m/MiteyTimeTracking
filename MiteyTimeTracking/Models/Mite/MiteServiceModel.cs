@@ -5,11 +5,11 @@ using Mite;
 
 namespace MiteyTimeTracking.Models.Mite
 {
-	public class MiteServices
+	public class MiteServiceModel
 	{
 		private readonly List<Service> _services;
 
-		public MiteServices(IList<Service> services)
+		public MiteServiceModel(IList<Service> services)
 		{
 			_services = new List<Service>(services);
 		}
