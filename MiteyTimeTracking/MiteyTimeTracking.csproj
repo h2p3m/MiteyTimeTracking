@@ -92,10 +92,10 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Mite\Customers.cs" />
-    <Compile Include="Models\Mite\MiteServices.cs" />
-    <Compile Include="Models\Mite\Projects.cs" />
-    <Compile Include="Models\Trello\Cards.cs" />
+    <Compile Include="Models\Mite\CustomerModel.cs" />
+    <Compile Include="Models\Mite\MiteServiceModel.cs" />
+    <Compile Include="Models\Mite\ProjectModel.cs" />
+    <Compile Include="Models\Trello\CardModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MiteWorkDayService.cs" />

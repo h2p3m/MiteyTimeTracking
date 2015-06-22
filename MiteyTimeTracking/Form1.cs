@@ -37,6 +37,8 @@ namespace MiteyTimeTracking
 
 		private TextProcessor TextProcessor { get; set; }
 
+		public DateTime today = DateTime.Now;
+
 		private bool _menuLock;
 		private readonly MiteModel _mcm;
 		private readonly TrelloModel _tcm;
@@ -177,6 +179,7 @@ namespace MiteyTimeTracking
 			if ((ModifierKeys & Keys.Control) == Keys.Control
 				&& e.KeyChar.ToString() == "\n")
 			{
+				//TODO add new TimeEntryObject
 				PrintStartingTime("\t");
 			}
 			else if ((ModifierKeys & Keys.Control) == Keys.Control
@@ -270,7 +273,7 @@ namespace MiteyTimeTracking
 
 		private void PrintStartingTime(string devider)
 		{
-			var date = DateTime.Now.ToShortTimeString();
+			var date = today.ToShortDateString();
 			int selectionStart = RichTextBox1.SelectionStart - 1;
 
 			RichTextBox1.Select(selectionStart, 1);

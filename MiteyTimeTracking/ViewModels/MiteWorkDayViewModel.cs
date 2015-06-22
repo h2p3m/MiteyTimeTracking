@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace MiteyTimeTracking.ViewModels
 {
-	[Serializable]
 	public class MiteWorkDayViewModel
 	{
+		public DateTime Date { get; set; }
 		public List<MiteTimeEntryViewModel> MiteTimeEntries { get; set; }
 	}
 }
