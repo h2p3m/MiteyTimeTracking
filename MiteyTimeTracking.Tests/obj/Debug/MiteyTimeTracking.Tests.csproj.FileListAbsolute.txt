@@ -1,0 +1,12 @@
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DALTests\bin\Debug\MiteyTimeTracking.Tests.dll
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DALTests\bin\Debug\MiteyTimeTracking.Tests.pdb
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DALTests\bin\Debug\MiteyTimeTracking.exe
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DALTests\bin\Debug\Mite.dll
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DALTests\bin\Debug\TrelloNet.dll
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DALTests\bin\Debug\MiteyTimeTracking.pdb
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DALTests\bin\Debug\Mite.pdb
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DALTests\bin\Debug\Mite.xml
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DALTests\bin\Debug\TrelloNet.xml
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DALTests\obj\Debug\MiteyTimeTracking.Tests.csprojResolveAssemblyReference.cache
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DALTests\obj\Debug\MiteyTimeTracking.Tests.dll
+C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.DALTests\obj\Debug\MiteyTimeTracking.Tests.pdb
