@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiteyTimeTracking.Tests", "MiteyTimeTracking.DALTests\MiteyTimeTracking.Tests.csproj", "{C2DECF16-032F-459F-AC87-F7349C48EFEC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiteyTimeTracking", "MiteyTimeTracking\MiteyTimeTracking.csproj", "{53AEB3F0-A794-4351-8269-C2C452E0D5ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiteyTimeTracking.Tests", "MiteyTimeTracking.Tests\MiteyTimeTracking.Tests.csproj", "{C2DECF16-032F-459F-AC87-F7349C48EFEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,22 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET20-Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET20-Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET20-Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET20-Release|Any CPU.Build.0 = Release|Any CPU
-		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET35CP-Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET35CP-Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET35CP-Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET35CP-Release|Any CPU.Build.0 = Release|Any CPU
-		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET40CP-Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET40CP-Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET40CP-Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET40CP-Release|Any CPU.Build.0 = Release|Any CPU
-		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{53AEB3F0-A794-4351-8269-C2C452E0D5ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{53AEB3F0-A794-4351-8269-C2C452E0D5ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53AEB3F0-A794-4351-8269-C2C452E0D5ED}.NET20-Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -51,6 +35,22 @@ Global
 		{53AEB3F0-A794-4351-8269-C2C452E0D5ED}.NET40CP-Release|Any CPU.Build.0 = Release|Any CPU
 		{53AEB3F0-A794-4351-8269-C2C452E0D5ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53AEB3F0-A794-4351-8269-C2C452E0D5ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET20-Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET20-Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET20-Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET20-Release|Any CPU.Build.0 = Release|Any CPU
+		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET35CP-Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET35CP-Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET35CP-Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET35CP-Release|Any CPU.Build.0 = Release|Any CPU
+		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET40CP-Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET40CP-Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET40CP-Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.NET40CP-Release|Any CPU.Build.0 = Release|Any CPU
+		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2DECF16-032F-459F-AC87-F7349C48EFEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
