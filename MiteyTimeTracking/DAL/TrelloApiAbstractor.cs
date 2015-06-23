@@ -4,7 +4,7 @@ using TrelloNet;
 
 namespace MiteyTimeTracking.DAL
 {
-	public class TrelloModel
+	public class TrelloApiAbstractor
 	{
 		//TODO authorizing new user:
 		//public Uri AuthorisationUrl { get { return _trello.GetAuthorizationUrl("MiteyTimeTracking", Scope.ReadWrite); } }
@@ -12,7 +12,7 @@ namespace MiteyTimeTracking.DAL
 
 		public CardModel Cards { get; private set; }
 
-		public TrelloModel(string apiKey, string token)
+		public TrelloApiAbstractor(string apiKey, string token)
 		{
 			ITrello trello = new Trello(apiKey);
 			trello.Authorize(token);

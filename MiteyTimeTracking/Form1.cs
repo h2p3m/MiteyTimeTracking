@@ -40,8 +40,8 @@ namespace MiteyTimeTracking
 		public DateTime today = DateTime.Now;
 
 		private bool _menuLock;
-		private readonly MiteModel _mcm;
-		private readonly TrelloModel _tcm;
+		private readonly MiteApiAbscrator _mcm;
+		private readonly TrelloApiAbstractor _tcm;
 		private readonly ListBox _tagBox;
 		private readonly string _customerTagSign;
 		private readonly string _tagPattern;
@@ -63,7 +63,7 @@ namespace MiteyTimeTracking
 
 			try
 			{
-				_mcm = new MiteModel();
+				_mcm = new MiteApiAbscrator();
 				_controller = new Controller(this);
 				TextProcessor = new TextProcessor(this);
 			}
@@ -78,7 +78,7 @@ namespace MiteyTimeTracking
 
 			try
 			{
-				_tcm = new TrelloModel(trelloApiKey, trelloToken);
+				_tcm = new TrelloApiAbstractor(trelloApiKey, trelloToken);
 			}
 			catch (Exception ex)
 			{
@@ -99,6 +99,8 @@ namespace MiteyTimeTracking
 			splitContainer1.SplitterDistance = 340;
 
 			Controller.InitalizeMiteDay();
+
+
 
 			_tagBox.ScrollAlwaysVisible = false;
 			_tagBox.IntegralHeight = true;

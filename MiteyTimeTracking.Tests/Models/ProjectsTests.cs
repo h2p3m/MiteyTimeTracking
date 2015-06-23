@@ -13,7 +13,7 @@ namespace MiteyTimeTracking.DAL.Models.Tests
 		[TestMethod()]
 		public void GetMatchedProjectNamesTest()
 		{
-			MiteModel mite = new MiteModel();
+			MiteApiAbscrator mite = new MiteApiAbscrator();
 			try
 			{
 				mite.Projects.GetMatchedProjectNames(">r", "hht");

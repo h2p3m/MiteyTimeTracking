@@ -5,13 +5,13 @@ using MiteyTimeTracking.Models.Mite;
 
 namespace MiteyTimeTracking.DAL
 {
-	public class MiteModel
+	public class MiteApiAbscrator
 	{
 		public CustomerModel Customers { get; private set; }
 		public ProjectModel Projects { get; private set; }
 		public MiteServiceModel Services { get; private set; }
 
-		public MiteModel()
+		public MiteApiAbscrator()
 		{
 			var uri = new Uri("https://lambfra.mite.yo.lk");
 			var miteConfiguration = new MiteConfiguration(uri, " 12439d9dafecb3c");
