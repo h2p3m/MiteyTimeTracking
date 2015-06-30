@@ -1,8 +1,6 @@
-MiteyTimeTracking.DAL/bin/
-MiteyTimeTracking.DAL/obj/
-MiteyTimeTracking.Forms/bin/
-MiteyTimeTracking.Forms/obj/
-MiteyTimeTracking.DALTests/bin/
-MiteyTimeTracking.DALTests/obj/
-MiteyTimeTracking/bin/
-MiteyTimeTracking/obj/
+*.suo
+*.sln.DotSettings.user
+[Bb]in/
+[Oo]bj/
+*/[Bb]in/
+*/[Oo]bj/

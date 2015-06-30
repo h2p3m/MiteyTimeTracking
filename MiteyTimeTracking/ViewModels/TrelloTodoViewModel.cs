@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using TrelloNet;
 
 namespace MiteyTimeTracking.ViewModels
 {
 	public class TrelloTodoViewModel
 	{
-		public List<string> TodoList { get; set; } 
+		public List<KeyValuePair<string, List<Card>>> TodoList { get; set; } 
 	}
 }
