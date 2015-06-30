@@ -99,8 +99,7 @@ namespace MiteyTimeTracking
 			splitContainer1.SplitterDistance = 340;
 
 			Controller.InitalizeMiteDay();
-
-
+			Controller.SetTrelloTodo();
 
 			_tagBox.ScrollAlwaysVisible = false;
 			_tagBox.IntegralHeight = true;
@@ -182,7 +181,7 @@ namespace MiteyTimeTracking
 				&& e.KeyChar.ToString() == "\n")
 			{
 				//TODO add new TimeEntryObject
-				PrintStartingTime("\t");
+				PrintStartingTime("\n");
 			}
 			else if ((ModifierKeys & Keys.Control) == Keys.Control
 					 && e.KeyChar.ToString() == " ")
@@ -275,18 +274,19 @@ namespace MiteyTimeTracking
 
 		private void PrintStartingTime(string devider)
 		{
-			var date = today.ToShortDateString();
+			var date = today.ToShortTimeString();
 			int selectionStart = RichTextBox1.SelectionStart - 1;
 
 			RichTextBox1.Select(selectionStart, 1);
-			RichTextBox1.SelectedText = ("\n" + date + devider);
+			RichTextBox1.SelectedText = ("\n" + date + " - ");
 
 			RichTextBox1.SelectionStart = selectionStart;
 			RichTextBox1.SelectionLength = date.Length + 1;
 
 			RichTextBox1.SelectionColor = Color.RoyalBlue;
-			RichTextBox1.SelectionStart += date.Length + 2;
+			RichTextBox1.SelectionStart += date.Length + 4;
 			RichTextBox1.SelectionColor = Color.Black;
+			RichTextBox1.SelectedText = ("\n");
 		}
 
 		private void TryApplyTagBoxSelection(KeyEventArgs e)
@@ -484,7 +484,7 @@ namespace MiteyTimeTracking
 			}
 			else
 			{
-				richTextBox2.Focus();
+				RichTextBox2.Focus();
 			}
 		}
 
@@ -563,6 +563,11 @@ namespace MiteyTimeTracking
 		private void Form1_Load(object sender, EventArgs e)
 		{
 
+		}
+
+		private void button4_Click(object sender, EventArgs e)
+		{
+			Controller.SetTrelloTodo();
 		}
 	}
 }

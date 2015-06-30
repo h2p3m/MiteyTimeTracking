@@ -70,10 +70,13 @@ namespace MiteyTimeTracking
 			this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
 			this.RichTextBox1 = new System.Windows.Forms.RichTextBox();
-			this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+			this.RichTextBox2 = new System.Windows.Forms.RichTextBox();
+			this.RichTextBox3 = new System.Windows.Forms.RichTextBox();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
+			this.button4 = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -83,6 +86,10 @@ namespace MiteyTimeTracking
 			this.splitContainer2.Panel1.SuspendLayout();
 			this.splitContainer2.Panel2.SuspendLayout();
 			this.splitContainer2.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+			this.splitContainer3.Panel1.SuspendLayout();
+			this.splitContainer3.Panel2.SuspendLayout();
+			this.splitContainer3.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -397,16 +404,16 @@ namespace MiteyTimeTracking
 			// 
 			// splitContainer2.Panel1
 			// 
-			this.splitContainer2.Panel1.Controls.Add(this.RichTextBox1);
+			this.splitContainer2.Panel1.Controls.Add(this.splitContainer3);
 			// 
 			// splitContainer2.Panel2
 			// 
-			this.splitContainer2.Panel2.Controls.Add(this.richTextBox2);
+			this.splitContainer2.Panel2.Controls.Add(this.RichTextBox2);
 			this.splitContainer2.Size = new System.Drawing.Size(866, 723);
 			this.splitContainer2.SplitterDistance = 427;
 			this.splitContainer2.TabIndex = 3;
 			// 
-			// richTextBox1
+			// RichTextBox1
 			// 
 			this.RichTextBox1.AcceptsTab = true;
 			this.RichTextBox1.BackColor = System.Drawing.Color.FloralWhite;
@@ -414,7 +421,7 @@ namespace MiteyTimeTracking
 			this.RichTextBox1.Font = new System.Drawing.Font("Calibri", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.RichTextBox1.Location = new System.Drawing.Point(0, 0);
 			this.RichTextBox1.Name = "RichTextBox1";
-			this.RichTextBox1.Size = new System.Drawing.Size(427, 723);
+			this.RichTextBox1.Size = new System.Drawing.Size(427, 330);
 			this.RichTextBox1.TabIndex = 1;
 			this.RichTextBox1.TabStop = false;
 			this.RichTextBox1.Text = "";
@@ -423,18 +430,46 @@ namespace MiteyTimeTracking
 			this.RichTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
 			this.RichTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress);
 			// 
-			// richTextBox2
+			// splitContainer3
 			// 
-			this.richTextBox2.AcceptsTab = true;
-			this.richTextBox2.BackColor = System.Drawing.Color.FloralWhite;
-			this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.richTextBox2.Location = new System.Drawing.Point(0, 0);
-			this.richTextBox2.Name = "richTextBox2";
-			this.richTextBox2.Size = new System.Drawing.Size(435, 723);
-			this.richTextBox2.TabIndex = 0;
-			this.richTextBox2.TabStop = false;
-			this.richTextBox2.Text = "";
-			this.richTextBox2.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
+			this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+			this.splitContainer3.Name = "splitContainer3";
+			this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+			// 
+			// splitContainer3.Panel1
+			// 
+			this.splitContainer3.Panel1.Controls.Add(this.RichTextBox1);
+			// 
+			// splitContainer3.Panel2
+			// 
+			this.splitContainer3.Panel2.Controls.Add(this.RichTextBox3);
+			this.splitContainer3.Size = new System.Drawing.Size(427, 723);
+			this.splitContainer3.SplitterDistance = 330;
+			this.splitContainer3.TabIndex = 0;
+			// 
+			// RichTextBox2
+			// 
+			this.RichTextBox2.AcceptsTab = true;
+			this.RichTextBox2.BackColor = System.Drawing.Color.FloralWhite;
+			this.RichTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.RichTextBox2.Location = new System.Drawing.Point(0, 0);
+			this.RichTextBox2.Name = "RichTextBox2";
+			this.RichTextBox2.Size = new System.Drawing.Size(435, 723);
+			this.RichTextBox2.TabIndex = 0;
+			this.RichTextBox2.TabStop = false;
+			this.RichTextBox2.Text = "";
+			this.RichTextBox2.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
+			// 
+			// RichTextBox3
+			// 
+			this.RichTextBox3.BackColor = System.Drawing.Color.FloralWhite;
+			this.RichTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.RichTextBox3.Location = new System.Drawing.Point(0, 0);
+			this.RichTextBox3.Name = "RichTextBox3";
+			this.RichTextBox3.Size = new System.Drawing.Size(427, 389);
+			this.RichTextBox3.TabIndex = 0;
+			this.RichTextBox3.Text = "";
 			// 
 			// button2
 			// 
@@ -452,6 +487,7 @@ namespace MiteyTimeTracking
 			// 
 			// button1
 			// 
+			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button1.Location = new System.Drawing.Point(13, 675);
 			this.button1.Name = "button1";
@@ -476,6 +512,19 @@ namespace MiteyTimeTracking
 			this.button3.UseVisualStyleBackColor = true;
 			this.button3.Click += new System.EventHandler(this.button3_Click);
 			// 
+			// button4
+			// 
+			this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.button4.BackColor = System.Drawing.SystemColors.Control;
+			this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.button4.Location = new System.Drawing.Point(123, 675);
+			this.button4.Name = "button4";
+			this.button4.Size = new System.Drawing.Size(131, 36);
+			this.button4.TabIndex = 5;
+			this.button4.Text = "reload todo";
+			this.button4.UseVisualStyleBackColor = true;
+			this.button4.Click += new System.EventHandler(this.button4_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -484,9 +533,9 @@ namespace MiteyTimeTracking
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.button3);
-			this.Controls.Add(this.menuStrip1);
+			this.Controls.Add(this.button4);
 			this.Controls.Add(this.splitContainer1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+			this.Controls.Add(this.menuStrip1);
 			this.KeyPreview = true;
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "Form1";
@@ -503,6 +552,10 @@ namespace MiteyTimeTracking
 			this.splitContainer2.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
 			this.splitContainer2.ResumeLayout(false);
+			this.splitContainer3.Panel1.ResumeLayout(false);
+			this.splitContainer3.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+			this.splitContainer3.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -547,11 +600,14 @@ namespace MiteyTimeTracking
 		private Button button2;
 		private SplitContainer splitContainer2;
 		private Button button3;
-		private RichTextBox richTextBox2;
+		public RichTextBox RichTextBox2;
 		private ToolStripMenuItem viewToolStripMenuItem;
 		private ToolStripMenuItem showOrHideMenuToolStripMenuItem;
 		private ToolStripMenuItem showOrHideLeftPanelToolStripMenuItem;
 		private ToolStripMenuItem showOrHideRightPanelToolStripMenuItem;
+		private SplitContainer splitContainer3;
+		public RichTextBox RichTextBox3;
+		private Button button4;
 
 	}
 }
