@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using MiteyTimeTracking.Core;
-using MiteyTimeTracking.DAL;
+using MiteyTimeTracking.Models.Mite;
 using MiteyTimeTracking.Properties;
 
 namespace MiteyTimeTracking
@@ -40,8 +40,8 @@ namespace MiteyTimeTracking
 		public DateTime today = DateTime.Now;
 
 		private bool _menuLock;
-		private readonly MiteApiAbscrator _mcm;
-		private readonly TrelloApiAbstractor _tcm;
+		private readonly ApiModelConnector _mcm;
+		private readonly Models.Trello.ApiModelConnector _tcm;
 		private readonly ListBox _tagBox;
 		private readonly string _customerTagSign;
 		private readonly string _tagPattern;
@@ -63,7 +63,7 @@ namespace MiteyTimeTracking
 
 			try
 			{
-				_mcm = new MiteApiAbscrator();
+				_mcm = new ApiModelConnector();
 				_controller = new Controller(this);
 				TextProcessor = new TextProcessor(this);
 			}
@@ -78,7 +78,7 @@ namespace MiteyTimeTracking
 
 			try
 			{
-				_tcm = new TrelloApiAbstractor(trelloApiKey, trelloToken);
+				_tcm = new Models.Trello.ApiModelConnector(trelloApiKey, trelloToken);
 			}
 			catch (Exception ex)
 			{
@@ -96,7 +96,16 @@ namespace MiteyTimeTracking
 
 			splitContainer1.Panel1Collapsed = true;
 			splitContainer2.Panel2Collapsed = true;
+			splitContainer3.Panel2Collapsed = true;
 			splitContainer1.SplitterDistance = 340;
+
+			button1.Visible = false;
+			button2.Visible = false;
+			button3.Visible = false;
+			button4.Visible = false;
+			button5.Visible = false;
+
+			RichTextBox3.ReadOnly = true;
 
 			Controller.InitalizeMiteDay();
 			Controller.SetTrelloTodo();
@@ -244,7 +253,13 @@ namespace MiteyTimeTracking
 		private void showOrHideRightPanelToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			_menuLock = true;
-			PanelRShowHide();
+			PanelRShowHide(splitContainer3);
+		}
+
+		private void showhideBottomPanelToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			_menuLock = true;
+			PanelRShowHide(splitContainer2);
 		}
 
 		private void TagBoxOnMouseDoubleClick(object sender, MouseEventArgs mouseEventArgs)
@@ -265,9 +280,32 @@ namespace MiteyTimeTracking
 
 		private void button3_Click(object sender, EventArgs e)
 		{
-			PanelRShowHide();
+			PanelRShowHide(splitContainer3);
 		}
 
+		private void button5_Click(object sender, EventArgs e)
+		{
+			PanelRShowHide(splitContainer2);
+		}
+
+		private void Form1_Load(object sender, EventArgs e)
+		{
+
+		}
+
+		private void button4_Click(object sender, EventArgs e)
+		{
+			Controller.SetTrelloTodo();
+		}
+
+		private void showhodeButtonsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			button1.Visible = !button1.Visible;
+			button2.Visible = !button2.Visible;
+			button3.Visible = !button3.Visible;
+			button4.Visible = !button4.Visible;
+			button5.Visible = !button5.Visible;
+		}
 		#endregion
 
 		#region Logic
@@ -474,17 +512,20 @@ namespace MiteyTimeTracking
 			splitContainer1.Panel1Collapsed = !splitContainer1.Panel1Collapsed;
 		}
 
-		private void PanelRShowHide()
+		private void PanelRShowHide(SplitContainer container)
 		{
-			splitContainer2.Panel2Collapsed = !splitContainer2.Panel2Collapsed;
+			container.Panel2Collapsed = !container.Panel2Collapsed;
 
-			if (splitContainer2.Panel2Collapsed)
+			if (container.Panel2.Controls.Contains(RichTextBox2))
 			{
-				RichTextBox1.Focus();
-			}
-			else
-			{
-				RichTextBox2.Focus();
+				if (container.Panel2Collapsed)
+				{
+					RichTextBox1.Focus();
+				}
+				else
+				{
+					RichTextBox2.Focus();
+				}
 			}
 		}
 
@@ -560,14 +601,5 @@ namespace MiteyTimeTracking
 
 		#endregion
 
-		private void Form1_Load(object sender, EventArgs e)
-		{
-
-		}
-
-		private void button4_Click(object sender, EventArgs e)
-		{
-			Controller.SetTrelloTodo();
-		}
 	}
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MiteyTimeTracking.DAL;
+using MiteyTimeTracking.Models.Mite;
 
 namespace MiteyTimeTracking.Tests
 {
@@ -12,7 +12,7 @@ namespace MiteyTimeTracking.Tests
 		{
 			try
 			{
-				MiteApiAbscrator mm = new MiteApiAbscrator();
+				ApiModelConnector mm = new ApiModelConnector();
 			}
 			catch (Exception)
 			{

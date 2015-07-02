@@ -1,17 +1,16 @@
 using System;
 using System.Collections.Generic;
 using Mite;
-using MiteyTimeTracking.Models.Mite;
 
-namespace MiteyTimeTracking.DAL
+namespace MiteyTimeTracking.Models.Mite
 {
-	public class MiteApiAbscrator
+	public class ApiModelConnector
 	{
 		public CustomerModel Customers { get; private set; }
 		public ProjectModel Projects { get; private set; }
 		public MiteServiceModel Services { get; private set; }
 
-		public MiteApiAbscrator()
+		public ApiModelConnector()
 		{
 			var uri = new Uri("https://lambfra.mite.yo.lk");
 			var miteConfiguration = new MiteConfiguration(uri, " 12439d9dafecb3c");

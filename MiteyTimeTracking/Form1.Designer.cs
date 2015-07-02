@@ -59,6 +59,7 @@ namespace MiteyTimeTracking
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.showOrHideMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.showOrHideLeftPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.showhideBottomPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.showOrHideRightPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,14 +70,16 @@ namespace MiteyTimeTracking
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-			this.RichTextBox1 = new System.Windows.Forms.RichTextBox();
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+			this.RichTextBox1 = new System.Windows.Forms.RichTextBox();
 			this.RichTextBox2 = new System.Windows.Forms.RichTextBox();
 			this.RichTextBox3 = new System.Windows.Forms.RichTextBox();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.button4 = new System.Windows.Forms.Button();
+			this.button5 = new System.Windows.Forms.Button();
+			this.showhodeButtonsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -103,7 +106,7 @@ namespace MiteyTimeTracking
             this.helpToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(1142, 42);
+			this.menuStrip1.Size = new System.Drawing.Size(1354, 42);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			this.menuStrip1.Visible = false;
@@ -300,7 +303,9 @@ namespace MiteyTimeTracking
 			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showOrHideMenuToolStripMenuItem,
             this.showOrHideLeftPanelToolStripMenuItem,
-            this.showOrHideRightPanelToolStripMenuItem});
+            this.showhideBottomPanelToolStripMenuItem,
+            this.showOrHideRightPanelToolStripMenuItem,
+            this.showhodeButtonsToolStripMenuItem});
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(78, 38);
 			this.viewToolStripMenuItem.Text = "View";
@@ -309,24 +314,32 @@ namespace MiteyTimeTracking
 			// 
 			this.showOrHideMenuToolStripMenuItem.Name = "showOrHideMenuToolStripMenuItem";
 			this.showOrHideMenuToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.M)));
-			this.showOrHideMenuToolStripMenuItem.Size = new System.Drawing.Size(428, 36);
-			this.showOrHideMenuToolStripMenuItem.Text = "Show or hide menu";
+			this.showOrHideMenuToolStripMenuItem.Size = new System.Drawing.Size(429, 36);
+			this.showOrHideMenuToolStripMenuItem.Text = "Show/hide menu";
 			this.showOrHideMenuToolStripMenuItem.Click += new System.EventHandler(this.showOrHideMenuToolStripMenuItem_Click);
 			// 
 			// showOrHideLeftPanelToolStripMenuItem
 			// 
 			this.showOrHideLeftPanelToolStripMenuItem.Name = "showOrHideLeftPanelToolStripMenuItem";
-			this.showOrHideLeftPanelToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.L)));
-			this.showOrHideLeftPanelToolStripMenuItem.Size = new System.Drawing.Size(428, 36);
-			this.showOrHideLeftPanelToolStripMenuItem.Text = "Show or hide left panel";
+			this.showOrHideLeftPanelToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D1)));
+			this.showOrHideLeftPanelToolStripMenuItem.Size = new System.Drawing.Size(429, 36);
+			this.showOrHideLeftPanelToolStripMenuItem.Text = "Show/hide left panel";
 			this.showOrHideLeftPanelToolStripMenuItem.Click += new System.EventHandler(this.showOrHideLeftPanelToolStripMenuItem_Click);
+			// 
+			// showhideBottomPanelToolStripMenuItem
+			// 
+			this.showhideBottomPanelToolStripMenuItem.Name = "showhideBottomPanelToolStripMenuItem";
+			this.showhideBottomPanelToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D2)));
+			this.showhideBottomPanelToolStripMenuItem.Size = new System.Drawing.Size(429, 36);
+			this.showhideBottomPanelToolStripMenuItem.Text = "Show/hide bottom panel";
+			this.showhideBottomPanelToolStripMenuItem.Click += new System.EventHandler(this.showhideBottomPanelToolStripMenuItem_Click);
 			// 
 			// showOrHideRightPanelToolStripMenuItem
 			// 
 			this.showOrHideRightPanelToolStripMenuItem.Name = "showOrHideRightPanelToolStripMenuItem";
-			this.showOrHideRightPanelToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.R)));
-			this.showOrHideRightPanelToolStripMenuItem.Size = new System.Drawing.Size(428, 36);
-			this.showOrHideRightPanelToolStripMenuItem.Text = "Show or hide right panel";
+			this.showOrHideRightPanelToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D3)));
+			this.showOrHideRightPanelToolStripMenuItem.Size = new System.Drawing.Size(429, 36);
+			this.showOrHideRightPanelToolStripMenuItem.Text = "Show/hide right panel";
 			this.showOrHideRightPanelToolStripMenuItem.Click += new System.EventHandler(this.showOrHideRightPanelToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
@@ -384,8 +397,8 @@ namespace MiteyTimeTracking
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-			this.splitContainer1.Size = new System.Drawing.Size(1142, 723);
-			this.splitContainer1.SplitterDistance = 272;
+			this.splitContainer1.Size = new System.Drawing.Size(1354, 998);
+			this.splitContainer1.SplitterDistance = 322;
 			this.splitContainer1.TabIndex = 1;
 			// 
 			// monthCalendar1
@@ -401,6 +414,7 @@ namespace MiteyTimeTracking
 			this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.splitContainer2.Location = new System.Drawing.Point(0, 0);
 			this.splitContainer2.Name = "splitContainer2";
+			this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
 			// 
 			// splitContainer2.Panel1
 			// 
@@ -408,10 +422,28 @@ namespace MiteyTimeTracking
 			// 
 			// splitContainer2.Panel2
 			// 
-			this.splitContainer2.Panel2.Controls.Add(this.RichTextBox2);
-			this.splitContainer2.Size = new System.Drawing.Size(866, 723);
-			this.splitContainer2.SplitterDistance = 427;
+			this.splitContainer2.Panel2.Controls.Add(this.RichTextBox3);
+			this.splitContainer2.Size = new System.Drawing.Size(1028, 998);
+			this.splitContainer2.SplitterDistance = 443;
 			this.splitContainer2.TabIndex = 3;
+			// 
+			// splitContainer3
+			// 
+			this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+			this.splitContainer3.Name = "splitContainer3";
+			// 
+			// splitContainer3.Panel1
+			// 
+			this.splitContainer3.Panel1.Controls.Add(this.RichTextBox1);
+			// 
+			// splitContainer3.Panel2
+			// 
+			this.splitContainer3.Panel2.Controls.Add(this.RichTextBox2);
+			this.splitContainer3.Size = new System.Drawing.Size(1028, 443);
+			this.splitContainer3.SplitterDistance = 584;
+			this.splitContainer3.SplitterWidth = 10;
+			this.splitContainer3.TabIndex = 0;
 			// 
 			// RichTextBox1
 			// 
@@ -421,7 +453,7 @@ namespace MiteyTimeTracking
 			this.RichTextBox1.Font = new System.Drawing.Font("Calibri", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.RichTextBox1.Location = new System.Drawing.Point(0, 0);
 			this.RichTextBox1.Name = "RichTextBox1";
-			this.RichTextBox1.Size = new System.Drawing.Size(427, 330);
+			this.RichTextBox1.Size = new System.Drawing.Size(584, 443);
 			this.RichTextBox1.TabIndex = 1;
 			this.RichTextBox1.TabStop = false;
 			this.RichTextBox1.Text = "";
@@ -430,24 +462,6 @@ namespace MiteyTimeTracking
 			this.RichTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
 			this.RichTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress);
 			// 
-			// splitContainer3
-			// 
-			this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-			this.splitContainer3.Name = "splitContainer3";
-			this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
-			// 
-			// splitContainer3.Panel1
-			// 
-			this.splitContainer3.Panel1.Controls.Add(this.RichTextBox1);
-			// 
-			// splitContainer3.Panel2
-			// 
-			this.splitContainer3.Panel2.Controls.Add(this.RichTextBox3);
-			this.splitContainer3.Size = new System.Drawing.Size(427, 723);
-			this.splitContainer3.SplitterDistance = 330;
-			this.splitContainer3.TabIndex = 0;
-			// 
 			// RichTextBox2
 			// 
 			this.RichTextBox2.AcceptsTab = true;
@@ -455,7 +469,7 @@ namespace MiteyTimeTracking
 			this.RichTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.RichTextBox2.Location = new System.Drawing.Point(0, 0);
 			this.RichTextBox2.Name = "RichTextBox2";
-			this.RichTextBox2.Size = new System.Drawing.Size(435, 723);
+			this.RichTextBox2.Size = new System.Drawing.Size(434, 443);
 			this.RichTextBox2.TabIndex = 0;
 			this.RichTextBox2.TabStop = false;
 			this.RichTextBox2.Text = "";
@@ -467,7 +481,7 @@ namespace MiteyTimeTracking
 			this.RichTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.RichTextBox3.Location = new System.Drawing.Point(0, 0);
 			this.RichTextBox3.Name = "RichTextBox3";
-			this.RichTextBox3.Size = new System.Drawing.Size(427, 389);
+			this.RichTextBox3.Size = new System.Drawing.Size(1028, 551);
 			this.RichTextBox3.TabIndex = 0;
 			this.RichTextBox3.Text = "";
 			// 
@@ -476,7 +490,7 @@ namespace MiteyTimeTracking
 			this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.button2.AutoSize = true;
 			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button2.Location = new System.Drawing.Point(1049, 12);
+			this.button2.Location = new System.Drawing.Point(1261, 12);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(83, 37);
 			this.button2.TabIndex = 3;
@@ -489,7 +503,7 @@ namespace MiteyTimeTracking
 			// 
 			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button1.Location = new System.Drawing.Point(13, 675);
+			this.button1.Location = new System.Drawing.Point(13, 950);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(104, 36);
 			this.button1.TabIndex = 2;
@@ -503,7 +517,7 @@ namespace MiteyTimeTracking
 			this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.button3.AutoSize = true;
 			this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button3.Location = new System.Drawing.Point(1030, 674);
+			this.button3.Location = new System.Drawing.Point(1242, 949);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(100, 37);
 			this.button3.TabIndex = 4;
@@ -517,7 +531,7 @@ namespace MiteyTimeTracking
 			this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.button4.BackColor = System.Drawing.SystemColors.Control;
 			this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button4.Location = new System.Drawing.Point(123, 675);
+			this.button4.Location = new System.Drawing.Point(123, 950);
 			this.button4.Name = "button4";
 			this.button4.Size = new System.Drawing.Size(131, 36);
 			this.button4.TabIndex = 5;
@@ -525,15 +539,37 @@ namespace MiteyTimeTracking
 			this.button4.UseVisualStyleBackColor = true;
 			this.button4.Click += new System.EventHandler(this.button4_Click);
 			// 
+			// button5
+			// 
+			this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.button5.BackColor = System.Drawing.SystemColors.Control;
+			this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.button5.Location = new System.Drawing.Point(260, 950);
+			this.button5.Name = "button5";
+			this.button5.Size = new System.Drawing.Size(131, 36);
+			this.button5.TabIndex = 6;
+			this.button5.Text = "Panel B";
+			this.button5.UseVisualStyleBackColor = true;
+			this.button5.Click += new System.EventHandler(this.button5_Click);
+			// 
+			// showhodeButtonsToolStripMenuItem
+			// 
+			this.showhodeButtonsToolStripMenuItem.Name = "showhodeButtonsToolStripMenuItem";
+			this.showhodeButtonsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
+			this.showhodeButtonsToolStripMenuItem.Size = new System.Drawing.Size(429, 36);
+			this.showhodeButtonsToolStripMenuItem.Text = "Show/hode buttons";
+			this.showhodeButtonsToolStripMenuItem.Click += new System.EventHandler(this.showhodeButtonsToolStripMenuItem_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1142, 723);
+			this.ClientSize = new System.Drawing.Size(1354, 998);
+			this.Controls.Add(this.button5);
+			this.Controls.Add(this.button4);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.button3);
-			this.Controls.Add(this.button4);
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.menuStrip1);
 			this.KeyPreview = true;
@@ -605,9 +641,12 @@ namespace MiteyTimeTracking
 		private ToolStripMenuItem showOrHideMenuToolStripMenuItem;
 		private ToolStripMenuItem showOrHideLeftPanelToolStripMenuItem;
 		private ToolStripMenuItem showOrHideRightPanelToolStripMenuItem;
-		private SplitContainer splitContainer3;
 		public RichTextBox RichTextBox3;
 		private Button button4;
+		private SplitContainer splitContainer3;
+		private Button button5;
+		private ToolStripMenuItem showhideBottomPanelToolStripMenuItem;
+		private ToolStripMenuItem showhodeButtonsToolStripMenuItem;
 
 	}
 }

@@ -1,10 +1,8 @@
-using System;
-using MiteyTimeTracking.Models.Trello;
 using TrelloNet;
 
-namespace MiteyTimeTracking.DAL
+namespace MiteyTimeTracking.Models.Trello
 {
-	public class TrelloApiAbstractor
+	public class ApiModelConnector
 	{
 		//TODO authorizing new user:
 		//public Uri AuthorisationUrl { get { return _trello.GetAuthorizationUrl("MiteyTimeTracking", Scope.ReadWrite); } }
@@ -12,13 +10,12 @@ namespace MiteyTimeTracking.DAL
 
 		public CardModel Cards { get; private set; }
 
-		public TrelloApiAbstractor(string apiKey, string token)
+		public ApiModelConnector(string apiKey, string token)
 		{
-			ITrello trello = new Trello(apiKey);
+			ITrello trello = new TrelloNet.Trello(apiKey);
 			trello.Authorize(token);
 
 			Cards = new CardModel(trello);
 		}
-
 	}
 }

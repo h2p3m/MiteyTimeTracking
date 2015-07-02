@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MiteyTimeTracking.DAL.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MiteyTimeTracking.Models.Mite;
+
 namespace MiteyTimeTracking.DAL.Models.Tests
 {
 	[TestClass()]
@@ -13,7 +10,7 @@ namespace MiteyTimeTracking.DAL.Models.Tests
 		[TestMethod()]
 		public void GetMatchedProjectNamesTest()
 		{
-			MiteApiAbscrator mite = new MiteApiAbscrator();
+			ApiModelConnector mite = new ApiModelConnector();
 			try
 			{
 				mite.Projects.GetMatchedProjectNames(">r", "hht");

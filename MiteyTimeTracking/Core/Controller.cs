@@ -23,11 +23,11 @@ namespace MiteyTimeTracking.Core
 		/// </summary>
 		public void InitalizeMiteDay()
 		{
-			MiteWorkDayService mdService = new MiteWorkDayService(_form1.today);
+			MiteWorkingDayService mdService = new MiteWorkingDayService(_form1.today);
 
 			if (mdService.GetSerializedMiteDay() == null || mdService.GetMiteWorkDay() == null)
 			{
-				_form1.RichTextBox1.Text = mdService.MiteWorkDayViewModel.Date.ToShortDateString() + @" ";
+				_form1.RichTextBox1.Text = mdService.MiteWorkingDayViewModel.Date.ToShortDateString() + @" ";
 				_form1.RichTextBox1.Find(_today.ToShortDateString());
 				_form1.RichTextBox1.SelectionColor = Color.RoyalBlue;
 				_form1.RichTextBox1.SelectionStart = _form1.RichTextBox1.Text.Length;
@@ -45,9 +45,13 @@ namespace MiteyTimeTracking.Core
 
 			foreach (var list in viewModel.TodoList)
 			{
+				if (list.Value.Count == 0)
+					continue;
 				ToggleBold(10);
+				_form1.RichTextBox3.SelectionColor = Color.DarkSlateBlue;
 				_form1.RichTextBox3.AppendText(list.Key);
 				ToggleBold(currentFont.Size);
+				_form1.RichTextBox3.SelectionColor = Color.Black;
 
 				foreach (var card in list.Value)
 				{
@@ -61,6 +65,8 @@ namespace MiteyTimeTracking.Core
 				_form1.RichTextBox3.AppendText(Environment.NewLine);
 				_form1.RichTextBox3.AppendText(Environment.NewLine);
 			}
+			_form1.RichTextBox3.AppendText(Environment.NewLine);
+			_form1.RichTextBox3.AppendText(Environment.NewLine);
 		}
 
 		private void ToggleBold(float size)

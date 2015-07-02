@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MiteyTimeTracking.ViewModels;
+﻿using MiteyTimeTracking.ViewModels;
 
 namespace MiteyTimeTracking.Services
 {
