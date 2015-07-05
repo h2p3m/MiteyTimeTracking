@@ -5,30 +5,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using MiteyTimeTracking.APIWrapper;
 using MiteyTimeTracking.Core;
-using MiteyTimeTracking.Models.Mite;
-using MiteyTimeTracking.Properties;
+using MiteyTimeTracking.Enums;
+using MiteyTimeTracking.Models.Trello;
 
 namespace MiteyTimeTracking
 {
-	public enum TagType
-	{
-		Customer,
-		Project,
-		Service,
-		Task
-	}
-
-	public enum PatternGroups
-	{
-		Date,
-		Time,
-		Customer,
-		Project,
-		Service,
-		Task
-	}
-
 	public partial class Form1 : Form
 	{
 		public string ActiveCustomer { set; get; }
@@ -41,7 +24,7 @@ namespace MiteyTimeTracking
 
 		private bool _menuLock;
 		private readonly ApiModelConnector _mcm;
-		private readonly Models.Trello.ApiModelConnector _tcm;
+		private readonly TrelloWrapper _tcm;
 		private readonly ListBox _tagBox;
 		private readonly string _customerTagSign;
 		private readonly string _tagPattern;
@@ -73,12 +56,9 @@ namespace MiteyTimeTracking
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 
-			string trelloApiKey = Settings.Default.trelloAPIKey;
-			string trelloToken = Settings.Default.trelloToken;
-
 			try
 			{
-				_tcm = new Models.Trello.ApiModelConnector(trelloApiKey, trelloToken);
+				_tcm = new TrelloWrapper();
 			}
 			catch (Exception ex)
 			{
@@ -95,15 +75,15 @@ namespace MiteyTimeTracking
 			KeyPreview = true;
 
 			splitContainer1.Panel1Collapsed = true;
-			splitContainer2.Panel2Collapsed = true;
-			splitContainer3.Panel2Collapsed = true;
+			splitContainerBottom.Panel2Collapsed = true;
+			splitContainerRight.Panel2Collapsed = true;
 			splitContainer1.SplitterDistance = 340;
 
-			button1.Visible = false;
-			button2.Visible = false;
-			button3.Visible = false;
-			button4.Visible = false;
-			button5.Visible = false;
+			btn_panelLeft.Visible = false;
+			btn_mainMenu.Visible = false;
+			btn_panelRight.Visible = false;
+			btn_reloadTodos.Visible = false;
+			btn_panelBottom.Visible = false;
 
 			RichTextBox3.ReadOnly = true;
 
@@ -112,13 +92,22 @@ namespace MiteyTimeTracking
 
 			_tagBox.ScrollAlwaysVisible = false;
 			_tagBox.IntegralHeight = true;
-			_tagBox.ItemHeight = RichTextBox1.Font.Height;
-			_tagBox.Size = new Size(400, RichTextBox1.Font.Height);
+			_tagBox.ItemHeight = mainTextBox.Font.Height;
+			_tagBox.Size = new Size(400, mainTextBox.Font.Height);
 			_tagBox.KeyDown += Tagbox_KeyDown;
 			_tagBox.MouseDoubleClick += TagBoxOnMouseDoubleClick;
 		}
 
 		#region EventHandlers
+
+		private void mainTextBox_TextChanged(object sender, EventArgs e)
+		{
+			CancelTagDetection();
+			string word = GetWordAtTextCursor(false);
+			if (!_dontDetect)
+				TextProcessor.ParseWord(word);
+			mainTextBox.SelectionColor = Color.Black;
+		}
 
 		private void Form1_KeyUp(object sender, KeyEventArgs e)
 		{
@@ -135,11 +124,11 @@ namespace MiteyTimeTracking
 			}
 		}
 
-		private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
+		private void mainTextBox_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode == Keys.Back && !string.IsNullOrWhiteSpace(RichTextBox1.Text))
+			if (e.KeyCode == Keys.Back && !string.IsNullOrWhiteSpace(mainTextBox.Text))
 			{
-				if (IsTagIdentifier(RichTextBox1.Text[RichTextBox1.SelectionStart - 1].ToString()))
+				if (IsTagIdentifier(mainTextBox.Text[mainTextBox.SelectionStart - 1].ToString()))
 				{
 					CancelTagDetection();
 				}
@@ -184,7 +173,7 @@ namespace MiteyTimeTracking
 			}
 		}
 
-		private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
+		private void mainTextBox_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if ((ModifierKeys & Keys.Control) == Keys.Control
 				&& e.KeyChar.ToString() == "\n")
@@ -202,19 +191,10 @@ namespace MiteyTimeTracking
 				string word = GetWordAtTextCursor(false);
 				if (!_dontDetect)
 					TextProcessor.ParseWord(word);
-				RichTextBox1.SelectionColor = Color.Black;
+				mainTextBox.SelectionColor = Color.Black;
 
 				e.Handled = true;
 			}
-		}
-
-		private void richTextBox1_TextChanged(object sender, EventArgs e)
-		{
-			CancelTagDetection();
-			string word = GetWordAtTextCursor(false);
-			if (!_dontDetect)
-				TextProcessor.ParseWord(word);
-			RichTextBox1.SelectionColor = Color.Black;
 		}
 
 		private void Tagbox_KeyDown(object sender, KeyEventArgs e)
@@ -222,20 +202,20 @@ namespace MiteyTimeTracking
 			TryApplyTagBoxSelection(e);
 		}
 
-		private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
+		private void mainTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
 		{
 			Process.Start(e.LinkText);
 		}
 
 		protected override void OnShown(EventArgs e)
 		{
-			RichTextBox1.Focus();
+			mainTextBox.Focus();
 			base.OnShown(e);
 		}
 
 		private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
 		{
-			RichTextBox1.Text = monthCalendar1.SelectionEnd.ToShortDateString();
+			mainTextBox.Text = monthCalendar1.SelectionEnd.ToShortDateString();
 		}
 
 		private void showOrHideMenuToolStripMenuItem_Click(object sender, EventArgs e)
@@ -253,13 +233,13 @@ namespace MiteyTimeTracking
 		private void showOrHideRightPanelToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			_menuLock = true;
-			PanelRShowHide(splitContainer3);
+			PanelRShowHide(splitContainerRight);
 		}
 
 		private void showhideBottomPanelToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			_menuLock = true;
-			PanelRShowHide(splitContainer2);
+			PanelRShowHide(splitContainerBottom);
 		}
 
 		private void TagBoxOnMouseDoubleClick(object sender, MouseEventArgs mouseEventArgs)
@@ -268,24 +248,24 @@ namespace MiteyTimeTracking
 				ApplyTagNameToRichTextBox();
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		private void btn_panelLeft_Click(object sender, EventArgs e)
 		{
 			PanelLShowHide();
 		}
 
-		private void button2_Click(object sender, EventArgs e)
+		private void btn_mainMenu_Click(object sender, EventArgs e)
 		{
 			MenuStripShowHide();
 		}
 
-		private void button3_Click(object sender, EventArgs e)
+		private void btn_panelRight_Click(object sender, EventArgs e)
 		{
-			PanelRShowHide(splitContainer3);
+			PanelRShowHide(splitContainerRight);
 		}
 
-		private void button5_Click(object sender, EventArgs e)
+		private void btn_panelBottom_Click(object sender, EventArgs e)
 		{
-			PanelRShowHide(splitContainer2);
+			PanelRShowHide(splitContainerBottom);
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
@@ -293,18 +273,18 @@ namespace MiteyTimeTracking
 
 		}
 
-		private void button4_Click(object sender, EventArgs e)
+		private void btn_reloadTodo_Click(object sender, EventArgs e)
 		{
 			Controller.SetTrelloTodo();
 		}
 
 		private void showhodeButtonsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			button1.Visible = !button1.Visible;
-			button2.Visible = !button2.Visible;
-			button3.Visible = !button3.Visible;
-			button4.Visible = !button4.Visible;
-			button5.Visible = !button5.Visible;
+			btn_panelLeft.Visible = !btn_panelLeft.Visible;
+			btn_mainMenu.Visible = !btn_mainMenu.Visible;
+			btn_panelRight.Visible = !btn_panelRight.Visible;
+			btn_reloadTodos.Visible = !btn_reloadTodos.Visible;
+			btn_panelBottom.Visible = !btn_panelBottom.Visible;
 		}
 		#endregion
 
@@ -313,18 +293,18 @@ namespace MiteyTimeTracking
 		private void PrintStartingTime(string devider)
 		{
 			var date = today.ToShortTimeString();
-			int selectionStart = RichTextBox1.SelectionStart - 1;
+			int selectionStart = mainTextBox.SelectionStart - 1;
 
-			RichTextBox1.Select(selectionStart, 1);
-			RichTextBox1.SelectedText = ("\n" + date + " - ");
+			mainTextBox.Select(selectionStart, 1);
+			mainTextBox.SelectedText = ("\n" + date + " - ");
 
-			RichTextBox1.SelectionStart = selectionStart;
-			RichTextBox1.SelectionLength = date.Length + 1;
+			mainTextBox.SelectionStart = selectionStart;
+			mainTextBox.SelectionLength = date.Length + 1;
 
-			RichTextBox1.SelectionColor = Color.RoyalBlue;
-			RichTextBox1.SelectionStart += date.Length + 4;
-			RichTextBox1.SelectionColor = Color.Black;
-			RichTextBox1.SelectedText = ("\n");
+			mainTextBox.SelectionColor = Color.RoyalBlue;
+			mainTextBox.SelectionStart += date.Length + 4;
+			mainTextBox.SelectionColor = Color.Black;
+			mainTextBox.SelectedText = ("\n");
 		}
 
 		private void TryApplyTagBoxSelection(KeyEventArgs e)
@@ -344,7 +324,7 @@ namespace MiteyTimeTracking
 		public void CancelTagDetection()
 		{
 			_tagBox.DataSource = null;
-			RichTextBox1.Controls.Clear();
+			mainTextBox.Controls.Clear();
 		}
 
 		private string GetWordAtTextCursor(bool cutTagIndicator)
@@ -364,13 +344,13 @@ namespace MiteyTimeTracking
 
 		private string GetCharsBeforeCursor()
 		{
-			if (!string.IsNullOrWhiteSpace(RichTextBox1.Text))
+			if (!string.IsNullOrWhiteSpace(mainTextBox.Text))
 			{
-				int i = RichTextBox1.SelectionStart - 1;
+				int i = mainTextBox.SelectionStart - 1;
 				string charsBeforeCursor = string.Empty;
-				while (i >= 0 && !string.IsNullOrWhiteSpace(RichTextBox1.Text[i].ToString()))
+				while (i >= 0 && !string.IsNullOrWhiteSpace(mainTextBox.Text[i].ToString()))
 				{
-					charsBeforeCursor += RichTextBox1.Text[i];
+					charsBeforeCursor += mainTextBox.Text[i];
 					if (IsTagIdentifier(charsBeforeCursor))
 					{
 						return ReverseCharsBeforeCursor(charsBeforeCursor);
@@ -387,13 +367,13 @@ namespace MiteyTimeTracking
 
 		private string GetCharsAfterCursor()
 		{
-			int i = RichTextBox1.SelectionStart;
+			int i = mainTextBox.SelectionStart;
 			string charsAfterCursor = string.Empty;
-			while (RichTextBox1.TextLength > i
-				&& !string.IsNullOrWhiteSpace(RichTextBox1.Text[i].ToString())
-				&& !IsTagIdentifier(RichTextBox1.Text[i].ToString()))
+			while (mainTextBox.TextLength > i
+				&& !string.IsNullOrWhiteSpace(mainTextBox.Text[i].ToString())
+				&& !IsTagIdentifier(mainTextBox.Text[i].ToString()))
 			{
-				charsAfterCursor += RichTextBox1.Text[i];
+				charsAfterCursor += mainTextBox.Text[i];
 				i++;
 			}
 			return charsAfterCursor;
@@ -416,13 +396,13 @@ namespace MiteyTimeTracking
 		{
 			if (_tagBox.SelectedItem != null)
 			{
-				int selectionStart = RichTextBox1.SelectionStart;
+				int selectionStart = mainTextBox.SelectionStart;
 
 				for (int i = selectionStart - 1; i > 0; i--)
 				{
-					if (IsTagIdentifier(RichTextBox1.Text[i].ToString()))
+					if (IsTagIdentifier(mainTextBox.Text[i].ToString()))
 					{
-						if (RichTextBox1.Text[i].ToString() == _customerTagSign)
+						if (mainTextBox.Text[i].ToString() == _customerTagSign)
 						{
 							//tagSign = richTextBox1.Text[i].ToString();
 							ActiveCustomer = _tagBox.SelectedItem.ToString()
@@ -433,13 +413,13 @@ namespace MiteyTimeTracking
 					selectionStart--;
 				}
 
-				RichTextBox1.SelectionStart = selectionStart;
-				RichTextBox1.SelectionLength = GetWordAtTextCursor(true).Length;
-				RichTextBox1.SelectedText = _tagBox.SelectedItem.ToString()
+				mainTextBox.SelectionStart = selectionStart;
+				mainTextBox.SelectionLength = GetWordAtTextCursor(true).Length;
+				mainTextBox.SelectedText = _tagBox.SelectedItem.ToString()
 								.Remove(0, 1).Split(',')[0];
 
 				_tagBox.DataSource = null;
-				RichTextBox1.Controls.Clear();
+				mainTextBox.Controls.Clear();
 			}
 		}
 
@@ -459,20 +439,20 @@ namespace MiteyTimeTracking
 			//if (_tagBox.Items.Count == 0)
 			if (_allFoundTags == null || _allFoundTags.Count == 0)
 			{
-				RichTextBox1.Controls.Clear();
+				mainTextBox.Controls.Clear();
 				_tagBox.DataSource = null;
 				return;
 			}
-			int height = (RichTextBox1.Font.Height + 10) * _allFoundTags.Count;
+			int height = (mainTextBox.Font.Height + 10) * _allFoundTags.Count;
 			int width = 423;
 			Size s = new Size();
 			s.Height = height;
 			s.Width = width;
 			_tagBox.Size = s;
-			RichTextBox1.Controls.Add(_tagBox);
-			Point point = RichTextBox1.GetPositionFromCharIndex(tokenPosition);
+			mainTextBox.Controls.Add(_tagBox);
+			Point point = mainTextBox.GetPositionFromCharIndex(tokenPosition);
 			//point.Y += richTextBox1.Font.Height * (lineNumber + 1);
-			point.Y += (int)Math.Ceiling(RichTextBox1.Font.GetHeight()) + 2;
+			point.Y += (int)Math.Ceiling(mainTextBox.Font.GetHeight()) + 2;
 			point.X += 2;
 			_tagBox.Location = point;
 			_tagBox.SelectedIndex = 0;
@@ -494,7 +474,7 @@ namespace MiteyTimeTracking
 						.Reverse().ToDictionary(d => d.Key, d => d.Value);
 					break;
 				case TagType.Task:
-					result = _tcm.Cards.GetCardsByNumber(tagName);
+					result = new CardModel().GetCardsByNumber(tagName);
 					break;
 			}
 			return result;
@@ -504,7 +484,7 @@ namespace MiteyTimeTracking
 
 		private void MenuStripShowHide()
 		{
-			menuStrip1.Visible = !menuStrip1.Visible;
+			mainMenu.Visible = !mainMenu.Visible;
 		}
 
 		private void PanelLShowHide()
@@ -520,7 +500,7 @@ namespace MiteyTimeTracking
 			{
 				if (container.Panel2Collapsed)
 				{
-					RichTextBox1.Focus();
+					mainTextBox.Focus();
 				}
 				else
 				{
@@ -537,32 +517,32 @@ namespace MiteyTimeTracking
 
 		private void Undo()
 		{
-			RichTextBox1.Undo();
+			mainTextBox.Undo();
 		}
 
 		private void Redo()
 		{
-			RichTextBox1.Redo();
+			mainTextBox.Redo();
 		}
 
 		private void Cut()
 		{
-			RichTextBox1.Cut();
+			mainTextBox.Cut();
 		}
 
 		private void Copy()
 		{
-			RichTextBox1.Copy();
+			mainTextBox.Copy();
 		}
 
 		private void Paste()
 		{
-			RichTextBox1.Paste();
+			mainTextBox.Paste();
 		}
 
 		private void SelectAll()
 		{
-			RichTextBox1.SelectAll();
+			mainTextBox.SelectAll();
 		}
 
 		#endregion

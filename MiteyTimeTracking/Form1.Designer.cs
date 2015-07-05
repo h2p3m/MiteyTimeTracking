@@ -32,7 +32,7 @@ namespace MiteyTimeTracking
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+			this.mainMenu = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,47 +69,47 @@ namespace MiteyTimeTracking
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-			this.RichTextBox1 = new System.Windows.Forms.RichTextBox();
+			this.splitContainerBottom = new System.Windows.Forms.SplitContainer();
+			this.splitContainerRight = new System.Windows.Forms.SplitContainer();
+			this.mainTextBox = new System.Windows.Forms.RichTextBox();
 			this.RichTextBox2 = new System.Windows.Forms.RichTextBox();
 			this.RichTextBox3 = new System.Windows.Forms.RichTextBox();
-			this.button2 = new System.Windows.Forms.Button();
-			this.button1 = new System.Windows.Forms.Button();
-			this.button3 = new System.Windows.Forms.Button();
-			this.button4 = new System.Windows.Forms.Button();
-			this.button5 = new System.Windows.Forms.Button();
+			this.btn_mainMenu = new System.Windows.Forms.Button();
+			this.btn_panelLeft = new System.Windows.Forms.Button();
+			this.btn_panelRight = new System.Windows.Forms.Button();
+			this.btn_reloadTodos = new System.Windows.Forms.Button();
+			this.btn_panelBottom = new System.Windows.Forms.Button();
 			this.showhodeButtonsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.menuStrip1.SuspendLayout();
+			this.mainMenu.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-			this.splitContainer2.Panel1.SuspendLayout();
-			this.splitContainer2.Panel2.SuspendLayout();
-			this.splitContainer2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-			this.splitContainer3.Panel1.SuspendLayout();
-			this.splitContainer3.Panel2.SuspendLayout();
-			this.splitContainer3.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.splitContainerBottom)).BeginInit();
+			this.splitContainerBottom.Panel1.SuspendLayout();
+			this.splitContainerBottom.Panel2.SuspendLayout();
+			this.splitContainerBottom.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.splitContainerRight)).BeginInit();
+			this.splitContainerRight.Panel1.SuspendLayout();
+			this.splitContainerRight.Panel2.SuspendLayout();
+			this.splitContainerRight.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// menuStrip1
+			// mainMenu
 			// 
-			this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.mainMenu.ImageScalingSize = new System.Drawing.Size(32, 32);
+			this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.helpToolStripMenuItem});
-			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(1354, 42);
-			this.menuStrip1.TabIndex = 0;
-			this.menuStrip1.Text = "menuStrip1";
-			this.menuStrip1.Visible = false;
+			this.mainMenu.Location = new System.Drawing.Point(0, 0);
+			this.mainMenu.Name = "mainMenu";
+			this.mainMenu.Size = new System.Drawing.Size(1354, 42);
+			this.mainMenu.TabIndex = 0;
+			this.mainMenu.Text = "mainMenu";
+			this.mainMenu.Visible = false;
 			// 
 			// fileToolStripMenuItem
 			// 
@@ -396,7 +396,7 @@ namespace MiteyTimeTracking
 			// 
 			// splitContainer1.Panel2
 			// 
-			this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
+			this.splitContainer1.Panel2.Controls.Add(this.splitContainerBottom);
 			this.splitContainer1.Size = new System.Drawing.Size(1354, 998);
 			this.splitContainer1.SplitterDistance = 322;
 			this.splitContainer1.TabIndex = 1;
@@ -409,58 +409,58 @@ namespace MiteyTimeTracking
 			this.monthCalendar1.TabStop = false;
 			this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
 			// 
-			// splitContainer2
+			// splitContainerBottom
 			// 
-			this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-			this.splitContainer2.Name = "splitContainer2";
-			this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+			this.splitContainerBottom.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainerBottom.Location = new System.Drawing.Point(0, 0);
+			this.splitContainerBottom.Name = "splitContainerBottom";
+			this.splitContainerBottom.Orientation = System.Windows.Forms.Orientation.Horizontal;
 			// 
-			// splitContainer2.Panel1
+			// splitContainerBottom.Panel1
 			// 
-			this.splitContainer2.Panel1.Controls.Add(this.splitContainer3);
+			this.splitContainerBottom.Panel1.Controls.Add(this.splitContainerRight);
 			// 
-			// splitContainer2.Panel2
+			// splitContainerBottom.Panel2
 			// 
-			this.splitContainer2.Panel2.Controls.Add(this.RichTextBox3);
-			this.splitContainer2.Size = new System.Drawing.Size(1028, 998);
-			this.splitContainer2.SplitterDistance = 443;
-			this.splitContainer2.TabIndex = 3;
+			this.splitContainerBottom.Panel2.Controls.Add(this.RichTextBox3);
+			this.splitContainerBottom.Size = new System.Drawing.Size(1028, 998);
+			this.splitContainerBottom.SplitterDistance = 443;
+			this.splitContainerBottom.TabIndex = 3;
 			// 
-			// splitContainer3
+			// splitContainerRight
 			// 
-			this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-			this.splitContainer3.Name = "splitContainer3";
+			this.splitContainerRight.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainerRight.Location = new System.Drawing.Point(0, 0);
+			this.splitContainerRight.Name = "splitContainerRight";
 			// 
-			// splitContainer3.Panel1
+			// splitContainerRight.Panel1
 			// 
-			this.splitContainer3.Panel1.Controls.Add(this.RichTextBox1);
+			this.splitContainerRight.Panel1.Controls.Add(this.mainTextBox);
 			// 
-			// splitContainer3.Panel2
+			// splitContainerRight.Panel2
 			// 
-			this.splitContainer3.Panel2.Controls.Add(this.RichTextBox2);
-			this.splitContainer3.Size = new System.Drawing.Size(1028, 443);
-			this.splitContainer3.SplitterDistance = 584;
-			this.splitContainer3.SplitterWidth = 10;
-			this.splitContainer3.TabIndex = 0;
+			this.splitContainerRight.Panel2.Controls.Add(this.RichTextBox2);
+			this.splitContainerRight.Size = new System.Drawing.Size(1028, 443);
+			this.splitContainerRight.SplitterDistance = 584;
+			this.splitContainerRight.SplitterWidth = 10;
+			this.splitContainerRight.TabIndex = 0;
 			// 
-			// RichTextBox1
+			// mainTextBox
 			// 
-			this.RichTextBox1.AcceptsTab = true;
-			this.RichTextBox1.BackColor = System.Drawing.Color.FloralWhite;
-			this.RichTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.RichTextBox1.Font = new System.Drawing.Font("Calibri", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.RichTextBox1.Location = new System.Drawing.Point(0, 0);
-			this.RichTextBox1.Name = "RichTextBox1";
-			this.RichTextBox1.Size = new System.Drawing.Size(584, 443);
-			this.RichTextBox1.TabIndex = 1;
-			this.RichTextBox1.TabStop = false;
-			this.RichTextBox1.Text = "";
-			this.RichTextBox1.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
-			this.RichTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
-			this.RichTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
-			this.RichTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress);
+			this.mainTextBox.AcceptsTab = true;
+			this.mainTextBox.BackColor = System.Drawing.Color.FloralWhite;
+			this.mainTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.mainTextBox.Font = new System.Drawing.Font("Calibri", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.mainTextBox.Location = new System.Drawing.Point(0, 0);
+			this.mainTextBox.Name = "mainTextBox";
+			this.mainTextBox.Size = new System.Drawing.Size(584, 443);
+			this.mainTextBox.TabIndex = 1;
+			this.mainTextBox.TabStop = false;
+			this.mainTextBox.Text = "";
+			this.mainTextBox.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.mainTextBox_LinkClicked);
+			this.mainTextBox.TextChanged += new System.EventHandler(this.mainTextBox_TextChanged);
+			this.mainTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mainTextBox_KeyDown);
+			this.mainTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mainTextBox_KeyPress);
 			// 
 			// RichTextBox2
 			// 
@@ -473,7 +473,7 @@ namespace MiteyTimeTracking
 			this.RichTextBox2.TabIndex = 0;
 			this.RichTextBox2.TabStop = false;
 			this.RichTextBox2.Text = "";
-			this.RichTextBox2.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
+			this.RichTextBox2.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.mainTextBox_LinkClicked);
 			// 
 			// RichTextBox3
 			// 
@@ -485,72 +485,72 @@ namespace MiteyTimeTracking
 			this.RichTextBox3.TabIndex = 0;
 			this.RichTextBox3.Text = "";
 			// 
-			// button2
+			// btn_mainMenu
 			// 
-			this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.button2.AutoSize = true;
-			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button2.Location = new System.Drawing.Point(1261, 12);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(83, 37);
-			this.button2.TabIndex = 3;
-			this.button2.TabStop = false;
-			this.button2.Text = "Menu";
-			this.button2.UseVisualStyleBackColor = true;
-			this.button2.Click += new System.EventHandler(this.button2_Click);
+			this.btn_mainMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_mainMenu.AutoSize = true;
+			this.btn_mainMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btn_mainMenu.Location = new System.Drawing.Point(1261, 12);
+			this.btn_mainMenu.Name = "btn_mainMenu";
+			this.btn_mainMenu.Size = new System.Drawing.Size(83, 37);
+			this.btn_mainMenu.TabIndex = 3;
+			this.btn_mainMenu.TabStop = false;
+			this.btn_mainMenu.Text = "Menu";
+			this.btn_mainMenu.UseVisualStyleBackColor = true;
+			this.btn_mainMenu.Click += new System.EventHandler(this.btn_mainMenu_Click);
 			// 
-			// button1
+			// btn_panelLeft
 			// 
-			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button1.Location = new System.Drawing.Point(13, 950);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(104, 36);
-			this.button1.TabIndex = 2;
-			this.button1.TabStop = false;
-			this.button1.Text = "Panel L";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.btn_panelLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btn_panelLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btn_panelLeft.Location = new System.Drawing.Point(13, 950);
+			this.btn_panelLeft.Name = "btn_panelLeft";
+			this.btn_panelLeft.Size = new System.Drawing.Size(104, 36);
+			this.btn_panelLeft.TabIndex = 2;
+			this.btn_panelLeft.TabStop = false;
+			this.btn_panelLeft.Text = "Panel L";
+			this.btn_panelLeft.UseVisualStyleBackColor = true;
+			this.btn_panelLeft.Click += new System.EventHandler(this.btn_panelLeft_Click);
 			// 
-			// button3
+			// btn_panelRight
 			// 
-			this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.button3.AutoSize = true;
-			this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button3.Location = new System.Drawing.Point(1242, 949);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(100, 37);
-			this.button3.TabIndex = 4;
-			this.button3.TabStop = false;
-			this.button3.Text = "Panel R";
-			this.button3.UseVisualStyleBackColor = true;
-			this.button3.Click += new System.EventHandler(this.button3_Click);
+			this.btn_panelRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_panelRight.AutoSize = true;
+			this.btn_panelRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btn_panelRight.Location = new System.Drawing.Point(1242, 949);
+			this.btn_panelRight.Name = "btn_panelRight";
+			this.btn_panelRight.Size = new System.Drawing.Size(100, 37);
+			this.btn_panelRight.TabIndex = 4;
+			this.btn_panelRight.TabStop = false;
+			this.btn_panelRight.Text = "Panel R";
+			this.btn_panelRight.UseVisualStyleBackColor = true;
+			this.btn_panelRight.Click += new System.EventHandler(this.btn_panelRight_Click);
 			// 
-			// button4
+			// btn_reloadTodos
 			// 
-			this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.button4.BackColor = System.Drawing.SystemColors.Control;
-			this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button4.Location = new System.Drawing.Point(123, 950);
-			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(131, 36);
-			this.button4.TabIndex = 5;
-			this.button4.Text = "reload todo";
-			this.button4.UseVisualStyleBackColor = true;
-			this.button4.Click += new System.EventHandler(this.button4_Click);
+			this.btn_reloadTodos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btn_reloadTodos.BackColor = System.Drawing.SystemColors.Control;
+			this.btn_reloadTodos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btn_reloadTodos.Location = new System.Drawing.Point(123, 950);
+			this.btn_reloadTodos.Name = "btn_reloadTodos";
+			this.btn_reloadTodos.Size = new System.Drawing.Size(131, 36);
+			this.btn_reloadTodos.TabIndex = 5;
+			this.btn_reloadTodos.Text = "reload todo";
+			this.btn_reloadTodos.UseVisualStyleBackColor = true;
+			this.btn_reloadTodos.Click += new System.EventHandler(this.btn_reloadTodo_Click);
 			// 
-			// button5
+			// btn_panelBottom
 			// 
-			this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.button5.BackColor = System.Drawing.SystemColors.Control;
-			this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button5.Location = new System.Drawing.Point(260, 950);
-			this.button5.Name = "button5";
-			this.button5.Size = new System.Drawing.Size(131, 36);
-			this.button5.TabIndex = 6;
-			this.button5.Text = "Panel B";
-			this.button5.UseVisualStyleBackColor = true;
-			this.button5.Click += new System.EventHandler(this.button5_Click);
+			this.btn_panelBottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btn_panelBottom.BackColor = System.Drawing.SystemColors.Control;
+			this.btn_panelBottom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btn_panelBottom.Location = new System.Drawing.Point(260, 950);
+			this.btn_panelBottom.Name = "btn_panelBottom";
+			this.btn_panelBottom.Size = new System.Drawing.Size(131, 36);
+			this.btn_panelBottom.TabIndex = 6;
+			this.btn_panelBottom.Text = "Panel B";
+			this.btn_panelBottom.UseVisualStyleBackColor = true;
+			this.btn_panelBottom.Click += new System.EventHandler(this.btn_panelBottom_Click);
 			// 
 			// showhodeButtonsToolStripMenuItem
 			// 
@@ -565,33 +565,33 @@ namespace MiteyTimeTracking
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1354, 998);
-			this.Controls.Add(this.button5);
-			this.Controls.Add(this.button4);
-			this.Controls.Add(this.button2);
-			this.Controls.Add(this.button1);
-			this.Controls.Add(this.button3);
+			this.Controls.Add(this.btn_panelBottom);
+			this.Controls.Add(this.btn_reloadTodos);
+			this.Controls.Add(this.btn_mainMenu);
+			this.Controls.Add(this.btn_panelLeft);
+			this.Controls.Add(this.btn_panelRight);
 			this.Controls.Add(this.splitContainer1);
-			this.Controls.Add(this.menuStrip1);
+			this.Controls.Add(this.mainMenu);
 			this.KeyPreview = true;
-			this.MainMenuStrip = this.menuStrip1;
+			this.MainMenuStrip = this.mainMenu;
 			this.Name = "Form1";
 			this.Text = "MiteyTimeTracking";
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
-			this.menuStrip1.ResumeLayout(false);
-			this.menuStrip1.PerformLayout();
+			this.mainMenu.ResumeLayout(false);
+			this.mainMenu.PerformLayout();
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
-			this.splitContainer2.Panel1.ResumeLayout(false);
-			this.splitContainer2.Panel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-			this.splitContainer2.ResumeLayout(false);
-			this.splitContainer3.Panel1.ResumeLayout(false);
-			this.splitContainer3.Panel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-			this.splitContainer3.ResumeLayout(false);
+			this.splitContainerBottom.Panel1.ResumeLayout(false);
+			this.splitContainerBottom.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.splitContainerBottom)).EndInit();
+			this.splitContainerBottom.ResumeLayout(false);
+			this.splitContainerRight.Panel1.ResumeLayout(false);
+			this.splitContainerRight.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.splitContainerRight)).EndInit();
+			this.splitContainerRight.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -599,8 +599,8 @@ namespace MiteyTimeTracking
 
 		#endregion
 
-		public RichTextBox RichTextBox1;
-		private MenuStrip menuStrip1;
+		public RichTextBox mainTextBox;
+		private MenuStrip mainMenu;
 		private SplitContainer splitContainer1;
 		private ToolStripMenuItem fileToolStripMenuItem;
 		private ToolStripMenuItem newToolStripMenuItem;
@@ -632,19 +632,19 @@ namespace MiteyTimeTracking
 		private ToolStripSeparator toolStripSeparator5;
 		private ToolStripMenuItem aboutToolStripMenuItem;
 		private MonthCalendar monthCalendar1;
-		private Button button1;
-		private Button button2;
-		private SplitContainer splitContainer2;
-		private Button button3;
+		private Button btn_panelLeft;
+		private Button btn_mainMenu;
+		private SplitContainer splitContainerBottom;
+		private Button btn_panelRight;
 		public RichTextBox RichTextBox2;
 		private ToolStripMenuItem viewToolStripMenuItem;
 		private ToolStripMenuItem showOrHideMenuToolStripMenuItem;
 		private ToolStripMenuItem showOrHideLeftPanelToolStripMenuItem;
 		private ToolStripMenuItem showOrHideRightPanelToolStripMenuItem;
 		public RichTextBox RichTextBox3;
-		private Button button4;
-		private SplitContainer splitContainer3;
-		private Button button5;
+		private Button btn_reloadTodos;
+		private SplitContainer splitContainerRight;
+		private Button btn_panelBottom;
 		private ToolStripMenuItem showhideBottomPanelToolStripMenuItem;
 		private ToolStripMenuItem showhodeButtonsToolStripMenuItem;
 

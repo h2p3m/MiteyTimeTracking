@@ -27,11 +27,11 @@ namespace MiteyTimeTracking.Core
 
 			if (mdService.GetSerializedMiteDay() == null || mdService.GetMiteWorkDay() == null)
 			{
-				_form1.RichTextBox1.Text = mdService.MiteWorkingDayViewModel.Date.ToShortDateString() + @" ";
-				_form1.RichTextBox1.Find(_today.ToShortDateString());
-				_form1.RichTextBox1.SelectionColor = Color.RoyalBlue;
-				_form1.RichTextBox1.SelectionStart = _form1.RichTextBox1.Text.Length;
-				_form1.RichTextBox1.SelectionColor = Color.Black;
+				_form1.mainTextBox.Text = mdService.MiteWorkingDayViewModel.Date.ToShortDateString() + @" ";
+				_form1.mainTextBox.Find(_today.ToShortDateString());
+				_form1.mainTextBox.SelectionColor = Color.RoyalBlue;
+				_form1.mainTextBox.SelectionStart = _form1.mainTextBox.Text.Length;
+				_form1.mainTextBox.SelectionColor = Color.Black;
 			}
 		}
 

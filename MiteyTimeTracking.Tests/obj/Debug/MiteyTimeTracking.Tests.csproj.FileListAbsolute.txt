@@ -17,7 +17,6 @@ C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyT
 C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.Tests\bin\Debug\TrelloNet.dll
 C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.Tests\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.Tests\bin\Debug\MiteyTimeTracking.pdb
-C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.Tests\bin\Debug\Mite.pdb
 C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.Tests\bin\Debug\Mite.xml
 C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.Tests\bin\Debug\TrelloNet.xml
 C:\Users\Hans-Peter\ownDocs\#Computer_IT_Entwicklung_Basteln\code\Windows\MiteyTimeTracking\MiteyTimeTracking.Tests\bin\Debug\Newtonsoft.Json.xml

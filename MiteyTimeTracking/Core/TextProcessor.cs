@@ -1,12 +1,29 @@
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using MiteyTimeTracking.Enums;
 
 namespace MiteyTimeTracking.Core
 {
 	public class TextProcessor
 	{
 		private Form1 _form1;
+
+		private static string datePattern = @"(?<" + PatternGroups.Date.ToString() + @">[0-9]{2}.[0-9]{2}.[0-9]{4})";
+		private static string timePattern = @"(?<" + PatternGroups.Time.ToString() + @">[0-9]{2}:[0-9]{2})";
+		private static string customerPattern = @"(?<" + PatternGroups.Customer.ToString() + @"><[A-Za-z]{1,})";
+		private static string projectPattern = @"(?<" + PatternGroups.Project.ToString() + @">>[A-Za-z]{1,})";
+		private static string servicePattern = @"(?<" + PatternGroups.Service.ToString() + @">'[A-Za-z]{1,})";
+		private static string taskPattern = @"(?<" + PatternGroups.Task.ToString() + @">#[0-9]{3,})";
+		//string wordPattern = @"(?<" + PatternGroups.text.ToString() + @">\w+)";
+
+		private string pattern = string.Format("{0}|{1}|{2}|{3}|{4}|{5}",
+			customerPattern,
+			projectPattern,
+			servicePattern,
+			taskPattern,
+			timePattern,
+			datePattern);
 
 		public TextProcessor(Form1 form1)
 		{
@@ -15,26 +32,10 @@ namespace MiteyTimeTracking.Core
 
 		public void ParseWord(string word = "")
 		{
-			string datePattern = @"(?<" + PatternGroups.Date.ToString() + @">[0-9]{2}.[0-9]{2}.[0-9]{4})";
-			string timePattern = @"(?<" + PatternGroups.Time.ToString() + @">[0-9]{2}:[0-9]{2})";
-			string customerPattern = @"(?<" + PatternGroups.Customer.ToString() + @"><[A-Za-z]{1,})";
-			string projectPattern = @"(?<" + PatternGroups.Project.ToString() + @">>[A-Za-z]{1,})";
-			string servicePattern = @"(?<" + PatternGroups.Service.ToString() + @">'[A-Za-z]{1,})";
-			string taskPattern = @"(?<" + PatternGroups.Task.ToString() + @">#[0-9]{3,})";
-			//string wordPattern = @"(?<" + PatternGroups.text.ToString() + @">\w+)";
-
-			string pattern = string.Format("{0}|{1}|{2}|{3}|{4}|{5}",
-				customerPattern,
-				projectPattern,
-				servicePattern,
-				taskPattern,
-				timePattern,
-				datePattern);
-
 			Regex myRegex = new Regex(pattern, RegexOptions.None);
 
-			int startPosition = _form1.RichTextBox1.SelectionStart;
-			int absoluteIndex = _form1.RichTextBox1.GetFirstCharIndexOfCurrentLine();
+			int startPosition = _form1.mainTextBox.SelectionStart;
+			int absoluteIndex = _form1.mainTextBox.GetFirstCharIndexOfCurrentLine();
 
 			string evalText;
 			if (word != "")
@@ -83,8 +84,8 @@ namespace MiteyTimeTracking.Core
 				}
 			}
 
-			_form1.RichTextBox1.SelectionStart = startPosition;
-			_form1.RichTextBox1.SelectionLength = 0;
+			_form1.mainTextBox.SelectionStart = startPosition;
+			_form1.mainTextBox.SelectionLength = 0;
 		}
 
 		private void SetColorAndFillTagBox(string word, Match myMatch, int absoluteIndex,
@@ -108,15 +109,15 @@ namespace MiteyTimeTracking.Core
 					searchWord = word.Remove(0, 1);
 					substract = 1;
 				}
-				var found = _form1.RichTextBox1.Find(searchWord, @from >= 0 ? @from : 0,
+				var found = _form1.mainTextBox.Find(searchWord, @from >= 0 ? @from : 0,
 					RichTextBoxFinds.WholeWord) - substract;
-				_form1.RichTextBox1.SelectionStart = found >= 0 ? found : 0;
-				_form1.RichTextBox1.SelectionLength = myMatch.Length;
-				_form1.RichTextBox1.SelectionColor = color;
+				_form1.mainTextBox.SelectionStart = found >= 0 ? found : 0;
+				_form1.mainTextBox.SelectionLength = myMatch.Length;
+				_form1.mainTextBox.SelectionColor = color;
 			}
-			else if (!string.IsNullOrEmpty(_form1.RichTextBox1.Text))
+			else if (!string.IsNullOrEmpty(_form1.mainTextBox.Text))
 			{
-				_form1.RichTextBox1.SelectionStart = absoluteIndex + myMatch.Index;
+				_form1.mainTextBox.SelectionStart = absoluteIndex + myMatch.Index;
 			}
 		}
 	}

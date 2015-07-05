@@ -808,6 +808,13 @@
             If the enum member we are trying to deserialize to is not found, it will return the first value in the enum instead of throwing.
             </summary>
         </member>
+        <member name="M:TrelloNet.ILabels.ForBoard(TrelloNet.IBoardId,System.Nullable{System.Int32})">
+            <summary>
+            GET /boards/[board_id]/labels
+            <br/>
+            Required permissions: read
+            </summary>
+        </member>
         <member name="M:TrelloNet.IAsyncLists.WithId(System.String)">
             <summary>
             GET /lists/[list_id]

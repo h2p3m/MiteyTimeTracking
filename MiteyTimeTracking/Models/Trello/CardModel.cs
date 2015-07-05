@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MiteyTimeTracking.APIWrapper;
 using TrelloNet;
 
 namespace MiteyTimeTracking.Models.Trello
@@ -8,15 +9,20 @@ namespace MiteyTimeTracking.Models.Trello
 	public class CardModel
 	{
 		private readonly ITrello _trello;
+
 		private readonly Board _devBoardId;
 		private readonly Board _issueBoardId;
 
-		public CardModel(ITrello trello)
+		public CardModel()
 		{
-			_trello = trello;
+			var _trello = new TrelloWrapper().Trello;
+
+			_trello.Members.Me();
+
 			_devBoardId = _trello.Boards.WithId("MpGmUVoZ");
 			_issueBoardId = _trello.Boards.WithId("ICydUUxq");
 		}
+
 
 		public Dictionary<string, string> GetCardsByNumber(string cardNumber)
 		{

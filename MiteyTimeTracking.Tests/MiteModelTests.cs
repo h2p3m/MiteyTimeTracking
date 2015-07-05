@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MiteyTimeTracking.Models.Mite;
+using MiteyTimeTracking.APIWrapper;
 
 namespace MiteyTimeTracking.Tests
 {

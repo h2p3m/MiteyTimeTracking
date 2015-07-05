@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Mite;
+using MiteyTimeTracking.Models.Mite;
 
-namespace MiteyTimeTracking.Models.Mite
+namespace MiteyTimeTracking.APIWrapper
 {
 	public class ApiModelConnector
 	{
