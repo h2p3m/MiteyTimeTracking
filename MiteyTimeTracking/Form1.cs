@@ -9,6 +9,8 @@ using MiteyTimeTracking.APIWrapper;
 using MiteyTimeTracking.Core;
 using MiteyTimeTracking.Enums;
 using MiteyTimeTracking.Models.Trello;
+using MiteyTimeTracking.Services;
+using MiteyTimeTracking.ViewModels;
 
 namespace MiteyTimeTracking
 {
@@ -23,7 +25,7 @@ namespace MiteyTimeTracking
 		public DateTime today = DateTime.Now;
 
 		private bool _menuLock;
-		private readonly ApiModelConnector _mcm;
+		private readonly MiteWrapper _miteWrapper;
 		private readonly TrelloWrapper _tcm;
 		private readonly ListBox _tagBox;
 		private readonly string _customerTagSign;
@@ -31,6 +33,7 @@ namespace MiteyTimeTracking
 		private Dictionary<string, string> _allFoundTags;
 		private bool _dontDetect;
 		private readonly Controller _controller;
+		private EntryTagService _ets;
 
 		public Form1()
 		{
@@ -43,10 +46,11 @@ namespace MiteyTimeTracking
 			_tagBox = new ListBox();
 			_menuLock = false;
 			InitializeComponent();
+			_ets = new EntryTagService();
 
 			try
 			{
-				_mcm = new ApiModelConnector();
+				_miteWrapper = new MiteWrapper();
 				_controller = new Controller(this);
 				TextProcessor = new TextProcessor(this);
 			}
@@ -288,6 +292,7 @@ namespace MiteyTimeTracking
 		}
 		#endregion
 
+		//transfer to ...Controller
 		#region Logic
 
 		private void PrintStartingTime(string devider)
@@ -425,13 +430,8 @@ namespace MiteyTimeTracking
 
 		public void FillAndPlaceListBox(int tokenPosition, string tagName, TagType currentTagType)
 		{
-			//int lineNumber = richTextBox1.GetLineFromCharIndex(richTextBox1.SelectionStart);
-
 			_tagBox.DataSource = null;
-			//_tagBox.Items.AddRange(GetAllSuitableTags(tagName, CurrentTagType)
-			//	.Select(k => k.Key != null ? k.Key : null).ToArray());
-
-			_allFoundTags = GetAllSuitableTags(tagName, currentTagType);
+			_allFoundTags = _ets.GetEntryTagViewModel(tagName, currentTagType, ActiveCustomer).AllTags;
 			_tagBox.DataSource = new BindingSource(_allFoundTags, null);
 			_tagBox.DisplayMember = "Value";
 			_tagBox.ValueMember = "Key";
@@ -458,27 +458,28 @@ namespace MiteyTimeTracking
 			_tagBox.SelectedIndex = 0;
 		}
 
-		private Dictionary<string, string> GetAllSuitableTags(string tagName, TagType currenTagType)
-		{
-			Dictionary<string, string> result = new Dictionary<string, string>();
-			switch (currenTagType)
-			{
-				case TagType.Customer:
-					result = _mcm.Customers.GetCustomerNames(tagName);
-					break;
-				case TagType.Project:
-					result = _mcm.Projects.GetMatchedProjectNames(tagName, ActiveCustomer);
-					break;
-				case TagType.Service:
-					result = _mcm.Services.GetMachedServiceNames(tagName)
-						.Reverse().ToDictionary(d => d.Key, d => d.Value);
-					break;
-				case TagType.Task:
-					result = new CardModel().GetCardsByNumber(tagName);
-					break;
-			}
-			return result;
-		}
+		//private Dictionary<string, string> GetAllSuitableTags(string tagName, TagType currenTagType)
+		//{
+		//	Dictionary<string, string> result = new Dictionary<string, string>();
+		//	switch (currenTagType)
+		//	{
+		//		case TagType.Customer:
+		//			//call: wrapper.viewModel
+		//			result = _miteWrapper.Customers.GetCustomerNames(tagName);
+		//			break;
+		//		case TagType.Project:
+		//			result = _miteWrapper.Projects.GetMatchedProjectNames(tagName, ActiveCustomer);
+		//			break;
+		//		case TagType.Service:
+		//			result = _miteWrapper.Services.GetMachedServiceNames(tagName)
+		//				.Reverse().ToDictionary(d => d.Key, d => d.Value);
+		//			break;
+		//		case TagType.Task:
+		//			result = new CardModel().GetCardsByNumber(tagName);
+		//			break;
+		//	}
+		//	return result;
+		//}
 
 		#region PanelControls
 

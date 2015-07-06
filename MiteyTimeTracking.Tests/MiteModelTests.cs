@@ -12,7 +12,7 @@ namespace MiteyTimeTracking.Tests
 		{
 			try
 			{
-				ApiModelConnector mm = new ApiModelConnector();
+				MiteWrapper mm = new MiteWrapper();
 			}
 			catch (Exception)
 			{

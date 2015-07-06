@@ -10,7 +10,7 @@ namespace MiteyTimeTracking.DAL.Models.Tests
 		[TestMethod()]
 		public void GetMatchedProjectNamesTest()
 		{
-			ApiModelConnector mite = new ApiModelConnector();
+			MiteWrapper mite = new MiteWrapper();
 			try
 			{
 				mite.Projects.GetMatchedProjectNames(">r", "hht");

@@ -15,10 +15,8 @@ namespace MiteyTimeTracking.Models.Trello
 
 		public CardModel()
 		{
-			var _trello = new TrelloWrapper().Trello;
-
-			_trello.Members.Me();
-
+			_trello = new TrelloWrapper().Trello;
+			
 			_devBoardId = _trello.Boards.WithId("MpGmUVoZ");
 			_issueBoardId = _trello.Boards.WithId("ICydUUxq");
 		}

@@ -5,14 +5,12 @@ namespace MiteyTimeTracking.APIWrapper
 {
 	public class TrelloWrapper
 	{
-		public static string ApiKey { get; private set; }
-		public static string Token { get; private set; }
 		public ITrello Trello { get; private set; }
 
 		public TrelloWrapper()
 		{
-			ApiKey = Settings.Default.trelloAPIKey;
-			Token = Settings.Default.trelloToken;
+			var ApiKey = Settings.Default.trelloAPIKey;
+			var Token = Settings.Default.trelloToken;
 
 			Trello = new Trello(ApiKey);
 			Trello.Authorize(Token);

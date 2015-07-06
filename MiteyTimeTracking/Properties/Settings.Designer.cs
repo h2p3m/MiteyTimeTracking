@@ -40,5 +40,14 @@ namespace MiteyTimeTracking.Properties {
                 return ((string)(this["trelloAPIKey"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("12439d9dafecb3c")]
+        public string miteAPIKey {
+            get {
+                return ((string)(this["miteAPIKey"]));
+            }
+        }
     }
 }
