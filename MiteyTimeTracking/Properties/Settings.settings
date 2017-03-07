@@ -1,15 +1,15 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MiteyTimeTracking.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="trelloToken" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">0cc36461b6d29c24df1c1d116a6b26176026b534bd7e66399f0bbfa4a45db584</Value>
+      <Value Profile="(Default)">#################</Value>
     </Setting>
     <Setting Name="trelloAPIKey" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">a209949165f39ad68df76fa729cd3d93</Value>
+      <Value Profile="(Default)">#################</Value>
     </Setting>
     <Setting Name="miteAPIKey" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">12439d9dafecb3c</Value>
+      <Value Profile="(Default)">#################</Value>
     </Setting>
   </Settings>
 </SettingsFile>
